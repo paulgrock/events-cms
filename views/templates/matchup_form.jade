@@ -1,0 +1,24 @@
+script(type='text/template', id='matchup_form')
+	.controls
+		.alert.alert-info
+			button.close(type='button', data-dismiss='alert') &times;
+			strong Please Note!
+			|  Teams entered into the matchup below must have first been added through the 'Team Creation' process!
+
+
+	.control-group
+		label.control-label Team A Name:
+		.controls.teamA
+
+	.control-group
+		label.control-label Team B Name:
+		.controls.teamB
+
+	.control-group
+		label.control-label Best Of:
+		.controls
+			select.span1#bestOf
+				option 1
+				option(selected) 3
+				- for(var i = 5; i <= 19; i+=2)
+					option=i

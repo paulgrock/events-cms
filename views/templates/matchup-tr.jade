@@ -1,0 +1,19 @@
+script(type='text/template', id='matchup_tr')
+	td <%= number %>
+	td
+		span.label.label-success <%= status %>
+	td <%= franchise %>
+	td <%= title %>
+	td <%= team1 %>
+	td <%= team2 %>
+	td <%= bestOf %>
+	td
+		.btn-group
+			| <a class="btn" href="/#{id}/<%= id %>">Edit</a>
+			button.btn.dropdown-toggle(data-toggle='dropdown')
+				span.caret
+			ul.dropdown-menu(role='menu')
+				li
+					| <a href="/#{id}/<%= id %>">Edit</a>
+				li
+					a(class='delete') Delete
