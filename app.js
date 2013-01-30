@@ -72,7 +72,7 @@ app.get('/videos/:id', videos.edit);
 // Api Passthrough
 app.get('/api/:type', api.passThrough);
 app.get('/api/:type/:id', api.passThrough);
-app.patch('/api/:type/:id', api.action);
+app.put('/api/:type/:id', api.action);
 app.post('/api/:type', api.action);
 app.delete('/api/:type/:id', api.action);
 

@@ -65,7 +65,7 @@ Koala.views.add('event_form', Backbone.View.extend({
 		this.listenTo(Groups, 'reset', this.prefill.setGroupIndex);
 
 		this.listenTo(stream_select, 'change', this.setStream);
-		this.listenTo(group_select, 'change', this.setGroup);
+		this.listenTo(group_select, 'change', this.setGroups);
 		this.listenTo(startDate_form, 'change', this.setStarts_at);
 		this.listenTo(endDate_form, 'change', this.setEnds_at);
 
@@ -84,7 +84,7 @@ Koala.views.add('event_form', Backbone.View.extend({
 		$('.todayBtn', this.views.endDate_form.el)
 		.click(function() {
 			var startDate = $('.date', self.views.startDate_form.el).val();
-			$('.date', self.views.endDate_form.el).val(startDate);
+			$('.date', self.views.endDate_form.el).val(startDate).trigger('change');
 		})
 		.html('Same Day');
 

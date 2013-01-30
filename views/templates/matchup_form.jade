@@ -22,3 +22,15 @@ script(type='text/template', id='matchup_form')
 				option(selected) 3
 				- for(var i = 5; i <= 19; i+=2)
 					option=i
+
+	.control-group
+		label.control-label Best Of:
+		.controls
+			ul.nav.nav-pills
+				li
+					a 1
+				li.active
+					a 3
+				- for(var i = 5; i <= 13; i+=2)
+					li
+						a=i
