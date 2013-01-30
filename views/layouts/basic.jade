@@ -1,0 +1,31 @@
+doctype 5
+html
+	head
+		block head
+			title= title
+			link(rel='stylesheet', href='/stylesheets/vendor/bootstrap/bootstrap.min.css')
+			link(rel='stylesheet', href='/stylesheets/vendor/bootstrap/bootstrap-responsive.min.css')
+			link(rel='stylesheet', href='/stylesheets/style.css')
+
+	body
+
+		include ../includes/topnav
+
+		.container
+
+			include ../includes/breadcrumbs
+
+			block content
+
+			hr
+			footer
+				block footer
+					p &copy; IGN Entertainment 2013
+
+
+		block scripts
+			script(src='/javascripts/vendor/jquery/jquery-1.9.0.min.js')
+			script(src='/javascripts/vendor/bootstrap/bootstrap.js')
+			script(src='/javascripts/vendor/underscore/underscore-min.js')
+			script(src='/javascripts/vendor/backbone/backbone-min.js')
+			script(src='/javascripts/koala.js')

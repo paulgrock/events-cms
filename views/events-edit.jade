@@ -1,0 +1,88 @@
+extends layouts/basic
+
+block append head
+	link(rel='stylesheet', href='/stylesheets/vendor/ui-darkness/jquery-ui-1.10.0.custom.min.css')
+
+
+block content
+
+	h2 Edit Event
+
+	.form-horizontal
+		#event_form_target
+
+		fieldset
+			legend Matchup
+			#matchup_form_target
+
+	.form-horizontal
+		.form-actions
+			button.btn.btn-danger#event-delete Delete
+			&nbsp;
+			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
+			a.btn(href=href) Go Back
+
+
+block append scripts
+	script(src='/javascripts/vendor/jquery/jquery-ui-1.10.0.custom.min.js')
+	script(src='/javascripts/vendor/moment/moment.min.js')
+
+	script(src='/javascripts/models/event.js')
+	script(src='/javascripts/models/matchup.js')
+
+	include templates/warning
+	script(src='/javascripts/models/warning.js')
+	script(src='/javascripts/views/warning.js')
+
+	include templates/date_form
+	script(src='/javascripts/views/date_form.js')
+
+	include templates/matchup_form
+	script(src='/javascripts/views/matchup_form.js')
+
+	script(src='/javascripts/models/stream.js')
+	script(src='/javascripts/collections/streams.js')
+	script(src='/javascripts/views/stream_option.js')
+	script(src='/javascripts/views/stream_select.js')
+
+	script(src='/javascripts/models/group.js')
+	script(src='/javascripts/collections/groups.js')
+	script(src='/javascripts/views/group_option.js')
+	script(src='/javascripts/views/group_select.js')
+
+	script(src='/javascripts/models/team.js')
+	script(src='/javascripts/collections/teams.js')
+	script(src='/javascripts/views/team_typeahead.js')
+
+	include templates/event-form
+	script(src='/javascripts/views/event_form.js')
+	script
+		$(function() {
+			//Event
+			var Event = Koala.models.new('event', {
+				id: '#{event_id}'
+			});
+
+			var event_form = Koala.views.new('event_form', {
+				model: Event
+			});
+
+			Event.fetch({
+
+				success: function(model, data) {
+
+					if(data && data.matchup && data.matchup.id) {
+						var Matchup = Koala.models.new('matchup');
+						Matchup.urlRoot = '/api/matchups';
+						Matchup.id = data.matchup.id;
+
+						var matchup_form = Koala.views.new('matchup_form', {
+							model: Matchup
+						});
+
+						Matchup.fetch();
+					}
+				}
+			});
+
+		});
