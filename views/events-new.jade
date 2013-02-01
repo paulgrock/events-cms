@@ -17,10 +17,10 @@ block content
 
 	.form-horizontal
 		.form-actions
-			button.btn.btn-success Save
+			button.btn.btn-success#save_event Create Event
 			&nbsp;
 			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
-			a.btn(href=href) Cancel
+			a.btn#cancel(href=href) Cancel
 
 
 block append scripts
@@ -59,18 +59,36 @@ block append scripts
 	script
 		$(function() {
 			var Event = Koala.models.new('event');
-
 			Koala.views.new('event_form', {
 				model: Event
 			})
 			.render();
 
 			var Matchup = Koala.models.new('matchup');
-
 			Koala.views.new('matchup_form', {
 				model: Matchup
 			})
 			.render();
+
+			$('#save_event').click(function() {
+				var self = this;
+
+				$(self).button('loading');
+
+				Event.set('matchup', _.clone(Matchup.attributes));
+
+				Event.save(null, {
+					success: function(model, response) {
+						location.replace("#{href}");
+					},
+					error: function(model, xhr) {
+						window.scrollTo(0,0);
+					},
+					complete: function() {
+						$(self).button('reset');
+					}
+				});
+			});
 
 			
 		});

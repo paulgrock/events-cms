@@ -56,7 +56,7 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 		$('#bestOf li.active', this.el).removeClass('active');
 		$(event.currentTarget).addClass('active');
 
-		this.model.set('bestOf', $('a', event.currentTarget).html(), {
+		this.model.set('best_of', $('a', event.currentTarget).html(), {
 			silent: true
 		});
 	},
