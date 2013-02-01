@@ -71,6 +71,8 @@ block append scripts
 
 				success: function(model, data) {
 
+					event_form.render();
+
 					if(data && data.matchup && data.matchup.id) {
 						var Matchup = Koala.models.new('matchup');
 						Matchup.urlRoot = '/api/matchups';

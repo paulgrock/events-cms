@@ -60,7 +60,6 @@ Koala.views.add('event_form', Backbone.View.extend({
 
 		//Listeners
 		var self = this;
-		this.listenTo(this.model, 'change', this.render);
 		this.listenTo(Streams, 'reset', this.prefill.setStreamIndex);
 		this.listenTo(Groups, 'reset', this.prefill.setGroupIndex);
 
@@ -107,32 +106,35 @@ Koala.views.add('event_form', Backbone.View.extend({
 
 	setTitle: function() {
 		var title = $('#event_title', this.el).val();
-		this.save({title: title});
+		this.model.set({title: title});
+		this.save();
 	},
 	setStream: function() {
 		var stream = this.views.stream_select.getSelectedStream();
-		this.save({stream: stream});
+		this.model.set({stream: stream});
+		this.save();
 	},
 	setGroups: function() {
 		var groups = this.views.group_select.getSelectedGroups();
-		this.save({groups: groups});
+		this.model.set({groups: groups});
+		this.save();
 	},
 	setStarts_at: function() {
 		var starts_at = this.views.startDate_form.generateDate();
-		this.save({starts_at: starts_at});
+		this.model.set({starts_at: starts_at});
+		this.save();
 	},
 	setEnds_at: function() {
 		var ends_at = this.views.endDate_form.generateDate();
-		this.save({ends_at: ends_at});
+		this.model.set({ends_at: ends_at});
+		this.save();
 	},
-
 
 
 	save: function(data) {
 		if(this.model.isNew()) return;
-		this.model.save(data, {
-			silent: true
-		});
+		if(!this.model.hasChanged()) return;
+		this.model.save(this.model.changedAttributes);
 	}
 
 

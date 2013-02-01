@@ -1,4 +1,7 @@
 Koala.models.add('matchup', Backbone.Model.extend({
-	urlRoot: '/api/matchups'
+	urlRoot: '/api/matchups',
+	defaults: {
+		best_of: 3
+	}
 }));
 
