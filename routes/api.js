@@ -7,8 +7,7 @@ var fetchContent = function(options, payload, cb) {
 	options.hostname 	= 'esports.ign.com';
 	options.port 		= 80;
 	options.path 		= '/content/v2' + options.path;
-	options.method 		= options.method || 'GET'
-	//options.method 		= 'GET'; //Override while developing
+	options.method 		= (options.method || 'GET').toUpperCase();
 
 	var req = http.request(options, function(res) {
 		var chunks = "";
@@ -18,7 +17,7 @@ var fetchContent = function(options, payload, cb) {
 		});
 
 		res.on('end', function() {
-			cb(chunks, res.headers);
+			cb(chunks, res.headers, res.statusCode);
 		});
 	});
 
@@ -45,14 +44,16 @@ var formPath = function(req) {
 var passThrough = function(req, res) {
 	var options = {
 		path: formPath(req),
-		method: req.route.method
+		method: req.route.method,
+		headers: req.headers
 	};
 
 	//Express parses body to json, convert back to string
 	var body = JSON.stringify(req.body);
 
-	fetchContent(options, body, function(chunks, headers) {
+	fetchContent(options, body, function(chunks, headers, status) {
 		res.set(headers);
+		res.status(status);
 		res.send(chunks);
 	});
 };

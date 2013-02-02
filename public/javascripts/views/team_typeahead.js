@@ -8,7 +8,8 @@ Koala.views.add('team_typeahead', Backbone.View.extend({
 	},
 
 	events: {
-		'change keyup' : 'onChange'
+		'change' : 'onChange',
+		'keyup' : 'onChange'
 	},
 
 	initialize: function() {
@@ -23,6 +24,21 @@ Koala.views.add('team_typeahead', Backbone.View.extend({
 
 	onChange: function() {
 		this.trigger('change');
+	},
+
+	setValue: function(value) {
+		this.$el.val(value);
+	},
+
+	getTeam: function() {
+		var name = this.$el.val();
+		var found = this.collection.find(function(team) {
+			return team.get('name') === name;
+		});
+
+		if(!found) return;
+
+		return {id: found.get('id')};
 	}
 
 }));

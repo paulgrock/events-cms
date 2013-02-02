@@ -7,17 +7,15 @@ block append head
 block content
 
 	h2 Edit Event
+	p.lead Changes made to this event will be instantly saved.
 
 	.form-horizontal
 		#event_form_target
-
-		fieldset
-			legend Matchup
-			#matchup_form_target
+		#matchup_form_target
 
 	.form-horizontal
 		.form-actions
-			button.btn.btn-danger#event-delete Delete
+			button.btn.btn-danger#delete Delete
 			&nbsp;
 			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
 			a.btn(href=href) Go Back
@@ -82,8 +80,29 @@ block append scripts
 							model: Matchup
 						});
 
-						Matchup.fetch();
+						Matchup.fetch({
+							success: function(model, data) {
+								matchup_form.render();
+							}
+						});
 					}
+
+					$('#delete').click(function() {
+						var self = this;
+						$(this).button('loading');
+
+						Event.destroy(null, {
+							success: function(model, response) {
+								location.replace("#{href}");
+							},
+							error: function(model, xhr) {
+								window.scrollTo(0,0);
+							},
+							complete: function() {
+								$(self).button('reset');
+							}
+						});
+					});
 				}
 			});
 

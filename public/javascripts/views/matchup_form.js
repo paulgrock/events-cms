@@ -19,7 +19,7 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 		});
 		Teams.fetch({
 			data: {
-				fields: ['id','name'],
+				fields: "id,name",
 				per_page: 1000
 			}
 		});
@@ -28,25 +28,28 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 		this.teamA_typeahead = teamA_typeahead;
 		this.teamB_typeahead = teamB_typeahead;
 
-		this.listenTo(this.model, 'change', this.render);
-		this.listenTo(this.teamA_typeahead, 'change', this.setTeamA);
-		this.listenTo(this.teamB_typeahead, 'change', this.setTeamB);
+		this.listenTo(this.teamA_typeahead, 'change', this.changeTeams);
+		this.listenTo(this.teamB_typeahead, 'change', this.changeTeams);
+		if(this.model.isNew()) this.listenTo(Teams, 'reset', this.changeTeams);
 	},
 
 	render: function() {
 		this.$el.html(this.template(this.model.attributes));
 		$('.teamA', this.el).append(this.teamA_typeahead.el);
 		$('.teamB', this.el).append(this.teamB_typeahead.el);
-
-		//Set defaults
-		if(this.model.attributes.teams) {
-			for(var i = 0; i < this.model.attributes.teams; i++) {
-				var team = this.model.attributes.teams[i];
-				$(this.teamA_typeahead.el).val(team.name);
-			}
-		}
+		this.fillTeams();
 
 		return this;
+	},
+
+	fillTeams: function() {
+		var teamList = this.model.get('teams');
+		var teamA = teamList.shift();
+		var teamB = teamList.shift();
+		this.teamA_typeahead.setValue(teamA && teamA.name || "TBA");
+		this.teamB_typeahead.setValue(teamB && teamB.name || "TBA");
+
+		if(!teamA || !teamB) this.changeTeams();
 	},
 
 	changeBestOf: function(event) {
@@ -56,17 +59,21 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 		$('#bestOf li.active', this.el).removeClass('active');
 		$(event.currentTarget).addClass('active');
 
-		this.model.set('best_of', $('a', event.currentTarget).html(), {
-			silent: true
-		});
+		this.model.set('best_of', $('a', event.currentTarget).html());
+		this.save();
 	},
 
-	changeTeamA: function() {
-
+	changeTeams: function() {
+		var teamList = [];
+		teamList.push(this.teamA_typeahead.getTeam());
+		teamList.push(this.teamB_typeahead.getTeam());
+		this.model.set('teams', teamList);
+		this.save();
 	},
 
-	changeTeamB: function() {
-
+	save: function() {
+		if(this.model.isNew() || !this.model.hasChanged()) return;
+		this.model.save();
 	}
 
 }));

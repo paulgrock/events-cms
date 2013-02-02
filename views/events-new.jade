@@ -10,10 +10,7 @@ block content
 
 	.form-horizontal
 		#event_form_target
-
-		fieldset
-			legend Matchup
-			#matchup_form_target
+		#matchup_form_target
 
 	.form-horizontal
 		.form-actions
@@ -79,7 +76,8 @@ block append scripts
 
 				Event.save(null, {
 					success: function(model, response) {
-						location.replace("#{href}");
+						var id = response && response.id;
+						location.replace("#{href}"+"/"+id);
 					},
 					error: function(model, xhr) {
 						window.scrollTo(0,0);

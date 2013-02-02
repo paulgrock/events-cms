@@ -1,6 +1,7 @@
 Koala.views.add('event_form', Backbone.View.extend({
 
 	el: $('#event_form_target'),
+
 	template: _.template($('#event_form').html()),
 
 	events: {
@@ -14,9 +15,7 @@ Koala.views.add('event_form', Backbone.View.extend({
 			collection: Streams
 		});
 		Streams.fetch({
-			data: {
-				test: true
-			}
+			fields: "id,name"
 		});
 
 		//Franchise
@@ -26,7 +25,7 @@ Koala.views.add('event_form', Backbone.View.extend({
 		});
 		Groups.fetch({
 			data: {
-				fields: ['id','name']
+				fields: "id,name"
 			}
 		});
 
@@ -68,6 +67,9 @@ Koala.views.add('event_form', Backbone.View.extend({
 		this.listenTo(startDate_form, 'change', this.setStarts_at);
 		this.listenTo(endDate_form, 'change', this.setEnds_at);
 
+		//Set defaults
+		if(this.model.isNew()) this.listenTo(Streams, 'reset', this.setStream); //New streams require a stream by default
+
 	},
 
 	render: function() {
@@ -103,38 +105,39 @@ Koala.views.add('event_form', Backbone.View.extend({
 		}
 	},
 
-
 	setTitle: function() {
 		var title = $('#event_title', this.el).val();
 		this.model.set({title: title});
 		this.save();
 	},
+
 	setStream: function() {
 		var stream = this.views.stream_select.getSelectedStream();
 		this.model.set({stream: stream});
 		this.save();
 	},
+
 	setGroups: function() {
 		var groups = this.views.group_select.getSelectedGroups();
 		this.model.set({groups: groups});
 		this.save();
 	},
+
 	setStarts_at: function() {
 		var starts_at = this.views.startDate_form.generateDate();
 		this.model.set({starts_at: starts_at});
 		this.save();
 	},
+
 	setEnds_at: function() {
 		var ends_at = this.views.endDate_form.generateDate();
 		this.model.set({ends_at: ends_at});
 		this.save();
 	},
 
-
 	save: function(data) {
-		if(this.model.isNew()) return;
-		if(!this.model.hasChanged()) return;
-		this.model.save(this.model.changedAttributes);
+		if(this.model.isNew() || !this.model.hasChanged()) return;
+		this.model.save();
 	}
 
 

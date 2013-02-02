@@ -1,8 +1,0 @@
-- var page = pages[id];
-- if(page.filters)
-	ul.nav.nav-pills
-		for f in page.filters
-			- var c = (f.slug == filter) ? 'active' : '';
-			- var u = f.slug !== undefined ? page.url+'?group='+f.slug : page.url;
-			li(class=c)
-				a(href=u)=f.title

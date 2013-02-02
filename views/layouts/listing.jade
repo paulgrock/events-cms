@@ -9,8 +9,26 @@ block content
 
 	hr
 	h2 #{type} Listing
-	
-	include ../includes/filter-pills
+
+	#group_pills
 
 	block listing-table
 
+
+append scripts
+	include ../templates/group-pill
+	script(src="/javascripts/models/group.js")
+	script(src="/javascripts/collections/groups.js")
+	script(src="/javascripts/views/group_pill.js")
+	script(src="/javascripts/views/group_pills.js")
+	script
+		$(function() {
+			var Groups = Koala.collections.new('groups');
+			var group_pills = Koala.views.new('group_pills', {
+				collection: Groups
+			});
+			Groups.fetch();
+
+			$('#group_pills').replaceWith(group_pills.el);
+
+		});
