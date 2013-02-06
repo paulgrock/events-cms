@@ -14,14 +14,9 @@ block listing-table
 
 
 block append scripts
-	include templates/event-tr
-	include templates/confirm-modal
+	script#event_tr(src="/javascripts/templates/event-tr.js", type="text/template")
+	script#confirm_modal(src="/javascripts/templates/confirm-modal.js", type="text/template")
 	script(src='/javascripts/vendor/moment/moment.min.js')
-	script(src='/javascripts/models/event.js')
-	script(src='/javascripts/collections/events.js')
-	script(src='/javascripts/views/event_tr.js')
-	script(src='/javascripts/views/event_tbody.js')
-	script(src='/javascripts/views/confirm_delete_modal.js')
 	script
 		$(function() {
 			var Collection = Koala.collections.new('#{id}');

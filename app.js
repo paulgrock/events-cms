@@ -6,6 +6,8 @@
 var express = require('express')
     , http = require('http')
     , path = require('path')
+    , fs = require('fs')
+    , buildJS = require('./build').build
     , index = require('./routes')
     , events = require('./routes/events')
     , matchups = require('./routes/matchups')

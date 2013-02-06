@@ -1,10 +1,9 @@
-script(type='text/template', id='confirm_modal')	
-	.modal-header
-		button.close(type='button', data-dismiss='modal', aria-hidden='true') x
-		h2 <%= action %>
-	.modal-body
-		.lead <%= message %>
-		p.text-info &quot;<%= snippet %>&quot;
-	.modal-footer
-		button.btn.cancel(data-dismiss='modal', aria-hidden='true') Cancel
-		button.btn.btn-danger.confirm Confirm
+.modal-header
+	button.close(type='button', data-dismiss='modal', aria-hidden='true') x
+	h2 <%= action %>
+.modal-body
+	.lead <%= message %>
+	p.text-info &quot;<%= snippet %>&quot;
+.modal-footer
+	button.btn.cancel(data-dismiss='modal', aria-hidden='true') Cancel
+	button.btn.btn-danger.confirm Confirm
