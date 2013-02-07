@@ -1,6 +1,7 @@
 Koala.views.add('warning', Backbone.View.extend({
 	className: 'alert',
-	template: _.template($('#warning').html()),
+
+	template: Koala.templates.get('warning'),
 
 	initialize: function() {
 		this.listenTo(this.model, 'change', this.render);

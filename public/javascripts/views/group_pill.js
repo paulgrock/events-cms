@@ -2,7 +2,7 @@ Koala.views.add('group_pill', Backbone.View.extend({
 	
 	tagName: 'li',
 
-	template: _.template($('#group_pill').html()),
+	template: Koala.templates.get('group_pill'),
 
 	initialize: function() {
 		var isActive = this.model.get('active');

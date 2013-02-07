@@ -2,11 +2,11 @@ Koala.views.add('event_form', Backbone.View.extend({
 
 	el: $('#event_form_target'),
 
-	template: _.template($('#event_form').html()),
-
 	events: {
 		'keyup #event_title' : 'setTitle',
 	},
+
+	template: Koala.templates.get('event_form'),
 
 	initialize: function() {
 		//Streams

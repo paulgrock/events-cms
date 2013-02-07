@@ -1,0 +1,1 @@
+Koala.templates.add('show_tr', '');

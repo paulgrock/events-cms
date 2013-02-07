@@ -2,11 +2,11 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 
 	el: $('#matchup_form_target'),
 
-	template: _.template($('#matchup_form').html()),
-
 	events: {
 		'click #bestOf li' : 'changeBestOf'
 	},
+
+	template: Koala.templates.get('matchup_form'),
 
 	initialize: function(options) {
 

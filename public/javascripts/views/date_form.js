@@ -1,7 +1,5 @@
 Koala.views.add('date_form', Backbone.View.extend({
 
-	template: _.template($('#date_form').html()),
-
 	events: {
 		'change .date, .time' : 'onChange',
 		'keyup .date, .time' : 'onChange',
@@ -12,6 +10,8 @@ Koala.views.add('date_form', Backbone.View.extend({
 			$('.time', this.el).val(moment().format('HH:mm')).trigger('change');
 		}
 	},
+
+	template: Koala.templates.get('date_form'),
 
 	initialize: function(options) {
 		this.Warning = Koala.models.new('warning');

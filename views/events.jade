@@ -12,10 +12,11 @@ block listing-table
 
 		tbody#eventsTable
 
+block append templates
+	script(src="/javascripts/templates/event_tr.js")
+	script(src="/javascripts/templates/confirm_modal.js")
 
 block append scripts
-	script#event_tr(src="/javascripts/templates/event-tr.js", type="text/template")
-	script#confirm_modal(src="/javascripts/templates/confirm-modal.js", type="text/template")
 	script(src='/javascripts/vendor/moment/moment.min.js')
 	script
 		$(function() {

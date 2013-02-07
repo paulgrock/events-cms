@@ -13,6 +13,8 @@ Koala.views.add('confirm_delete_modal', Backbone.View.extend({
 		}
 	},
 
+	template: Koala.templates.get('confirm_modal'),
+
 	initialize: function() {
 		var self = this;
 		this.listenTo(this.model, "change", this.render);
@@ -23,8 +25,6 @@ Koala.views.add('confirm_delete_modal', Backbone.View.extend({
 		$("body").append(this.render().el);
 		$(this.$el).modal();
 	},
-
-	template: _.template($('#confirm_modal').html()),
 
 	render: function() {
 		this.$el.html(this.template(this.options.modal));

@@ -1,2 +1,1 @@
-<button type="button" data-dismiss="alert" class="close">&times;</button><strong><%= header %>
-<%= message %></strong>
+Koala.templates.add('warning', '<button type="button" data-dismiss="alert" class="close">&times;</button><strong><%= header %><%= message %></strong>');

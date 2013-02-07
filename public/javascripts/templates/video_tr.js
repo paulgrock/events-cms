@@ -1,0 +1,1 @@
+Koala.templates.add('video_tr', '');

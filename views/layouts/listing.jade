@@ -13,10 +13,12 @@ block content
 	#group_pills
 
 	block listing-table
-	
 
-append scripts
-	script#group_pill(src="javascripts/templates/group-pill.js", type="text/template")
+
+block append templates
+	script(src="/javascripts/templates/group_pill.js")
+
+block append scripts
 	script
 		$(function() {
 			var Groups = Koala.collections.new('groups');
