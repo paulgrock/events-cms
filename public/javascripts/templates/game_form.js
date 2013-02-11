@@ -1,0 +1,1 @@
+Koala.templates.add('game_form', '<legend>Games</legend>');

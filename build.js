@@ -11,7 +11,7 @@ var util = require('util');
 
 var publicRootPath = "public/javascripts/";
 var templatesPath = "views/templates/";
-var subDirectories = ["models", "collections", "views"]; //Order is important
+var subDirectories = ["templates", "models", "collections", "views"]; //Order is important
 var templateWatchers = [];
 var publicJSWatchers = [];
 
@@ -36,11 +36,13 @@ var publicJSWatchers = [];
 	var templates = fs.readdirSync(templatesPath);
 	templateWatchers.push(fs.watch(templatesPath, compileJadeTemplates)); //Watch template dir
 	for(var i in templates) {
+		if(path.extname(templates[i]) !== ".jade") continue;
+
 		var basename = path.basename(templates[i], ".jade");
 		var templatePath = path.join(templatesPath, templates[i]);
 		var template = fs.readFileSync(templatePath);
 		var compiled = addPadding(basename, jade.compile(template)());
-		fs.writeFileSync(path.join(publicRootPath, "templates", basename + ".js"), compiled);
+		fs.writeFileSync(path.join(publicRootPath, "templates", basename + ".js"), compiled, "utf8");
 		templateWatchers.push(fs.watch(templatePath, compileJadeTemplates));
 	}
 })();
@@ -62,11 +64,16 @@ var publicJSWatchers = [];
 		publicJSWatchers.push(fs.watch(p, concatinatePublicJS)); //Watch file for changes
 	};
 
+	//Add base Koala
+	appendToPile("koala.js");
+
 	//Cycle through each directory in order, appending each file to public/javascripts/koala-package.js
 	for(var i in subDirectories) {
 		var subDirectoryPath = path.join(publicRootPath,subDirectories[i]);
 		var files = fs.readdirSync(subDirectoryPath);
 		for(var j in files) {
+			if(path.extname(files[j]) !== ".js") continue;
+
 			appendToPile(path.join(subDirectories[i], files[j]));
 		}
 		publicJSWatchers.push(fs.watch(subDirectoryPath, concatinatePublicJS)); //Watch subdirectory
@@ -76,7 +83,7 @@ var publicJSWatchers = [];
 	var compressedPile = UglifyJS.minify(jsPile, {fromString: true}).code;
 
 	//Write compressed data to koala-package.js
-	fs.writeFileSync(publicRootPath + "koala-mvc.js", compressedPile);
+	fs.writeFileSync(path.join(publicRootPath, "koala-compiled.js"), compressedPile, "utf8");
 })();
 
 

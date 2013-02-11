@@ -18,13 +18,6 @@ block content
 			&nbsp;
 			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
 			a.btn(href=href) Go Back
-
-
-block append templates
-	script(src='/javascripts/templates/warning.js')
-	script(src='/javascripts/templates/date_form.js')
-	script(src='/javascripts/templates/matchup_form.js')
-	script(src='/javascripts/templates/event_form.js')
 		
 
 block append scripts
@@ -45,22 +38,19 @@ block append scripts
 
 				success: function(model, data) {
 
+					$('#event_form_target').replaceWith(event_form.el);
 					event_form.render();
 
 					if(data && data.matchup && data.matchup.id) {
-						var Matchup = Koala.models.new('matchup');
-						Matchup.urlRoot = '/api/matchups';
-						Matchup.id = data.matchup.id;
+						var Matchup = Koala.models.new('matchup', data.matchup);
 
 						var matchup_form = Koala.views.new('matchup_form', {
 							model: Matchup
 						});
 
-						Matchup.fetch({
-							success: function(model, data) {
-								matchup_form.render();
-							}
-						});
+						$('#matchup_form_target').replaceWith(matchup_form.el);
+						matchup_form.render();
+
 					}
 
 					$('#delete').click(function() {

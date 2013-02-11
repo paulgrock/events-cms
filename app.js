@@ -42,19 +42,12 @@ function Page(id, title, url, filters) {
     this.filters = filters;
 }
 
-var filters = [
-    {title: "All",                slug: undefined},
-    {title: "Starcraft 2",        slug: "starcraft-2"},
-    {title: "League of Legends",  slug: "league-of-legends"},
-    {title: "Shootmania",         slug: "shootmania"}
-];
-
 app.locals.pages = {
     home:     new Page('home', 'Home', '/'),
-    events:   new Page('events', 'Events', '/events', filters),
-    matchups: new Page('matchups', 'Matchups', '/matchups', filters),
-    teams:    new Page('teams', 'Teams', '/teams', filters),
-    videos:   new Page('videos', 'Videos', '/videos', filters)
+    events:   new Page('events', 'Events', '/events'),
+    matchups: new Page('matchups', 'Matchups', '/matchups'),
+    teams:    new Page('teams', 'Teams', '/teams'),
+    videos:   new Page('videos', 'Videos', '/videos')
 };
 
 // Basic Webserver

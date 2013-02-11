@@ -1,6 +1,6 @@
 Koala.views.add('matchup_form', Backbone.View.extend({
 
-	el: $('#matchup_form_target'),
+	tagName: 'fieldset',
 
 	events: {
 		'click #bestOf li' : 'changeBestOf'
@@ -10,27 +10,30 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 
 	initialize: function(options) {
 
-		var Teams = Koala.collections.new('teams');
-		var teamA_typeahead = Koala.views.new('team_typeahead', {
-			collection: Teams
+		//Team Typeaheads
+		this.Teams = Koala.collections.new('teams');
+		this.teamA_typeahead = Koala.views.new('team_typeahead', {
+			collection: this.Teams
 		});
-		var teamB_typeahead = Koala.views.new('team_typeahead', {
-			collection: Teams
+		this.teamB_typeahead = Koala.views.new('team_typeahead', {
+			collection: this.Teams
 		});
-		Teams.fetch({
+		this.Teams.fetch({
 			data: {
 				fields: "id,name",
 				per_page: 1000
 			}
 		});
 
-		this.Teams = Teams;
-		this.teamA_typeahead = teamA_typeahead;
-		this.teamB_typeahead = teamB_typeahead;
-
 		this.listenTo(this.teamA_typeahead, 'change', this.changeTeams);
 		this.listenTo(this.teamB_typeahead, 'change', this.changeTeams);
-		if(this.model.isNew()) this.listenTo(Teams, 'reset', this.changeTeams);
+		if(this.model.isNew()) this.listenTo(this.Teams, 'reset', this.changeTeams);
+
+		//Games
+		this.game_form = Koala.views.new('game_form', {
+			collection: this.model.games,
+			matchup: this.model.teams
+		});
 	},
 
 	render: function() {
@@ -38,6 +41,9 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 		$('.teamA', this.el).append(this.teamA_typeahead.el);
 		$('.teamB', this.el).append(this.teamB_typeahead.el);
 		this.fillTeams();
+
+		this.$el.append(this.game_form.el);
+		this.game_form.render();
 
 		return this;
 	},

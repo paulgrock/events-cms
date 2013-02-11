@@ -1,7 +1,5 @@
 Koala.views.add('event_form', Backbone.View.extend({
 
-	el: $('#event_form_target'),
-
 	events: {
 		'keyup #event_title' : 'setTitle',
 	},
@@ -33,13 +31,13 @@ Koala.views.add('event_form', Backbone.View.extend({
 		var startDate_form = Koala.views.new('date_form', {
 			model: this.model,
 			dateKey: 'starts_at',
-			warningHeader: "Starting:",
+			warningHeader: "Starting: ",
 			type: 'Start'
 		});
 		var endDate_form = Koala.views.new('date_form', {
 			model: this.model,
 			dateKey: 'ends_at',
-			warningHeader: "Ending:",
+			warningHeader: "Ending: ",
 			type: 'End'
 		});
 
