@@ -108,13 +108,13 @@ app.get('/events', events.list);
 app.get('/events/new', events.new);
 app.get('/events/:event_id', events.edit);
 app.get('/matchups', matchups.list);
-app.get('/matchups/:id', matchups.edit)
+app.get('/matchups/:matchup_id', matchups.edit)
 app.get('/teams', teams.list);
-app.get('/teams/:id', teams.edit);
+app.get('/teams/:team_id', teams.edit);
 app.get('/shows', shows.list);
-app.get('/shows/:id', shows.edit);
+app.get('/shows/:show_id', shows.edit);
 app.get('/videos', videos.list);
-app.get('/videos/:id', videos.edit);
+app.get('/videos/:video_id', videos.edit);
 
 // Api Passthrough
 app.get('/api/:type', api.passThrough);

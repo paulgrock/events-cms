@@ -1,8 +1,8 @@
 exports.list = function(req, res){
-  res.render('listing', 
+  res.render("listing", 
   	{
-      id: 'events',
-  		title: 'Event Listing',
+      id: "events",
+  		title: "Event Listing",
   		breadcrumbs: [
   			{title: "Home", url: "/"},
   			{title: "Events"}
@@ -17,26 +17,26 @@ exports.edit = function(req, res){
   
   res.render('events-edit', 
   	{
-      id: 'event_edit',
-  		title: 'Edit Event',
+      id: "event_edit",
+  		title: "Edit Event",
   		breadcrumbs: [
   			{title: "Home",url: "/"},
   			{title: "Events",url: "/events"},
-  			{title: 'Edit Event' }
+  			{title: "Edit Event"}
   		],
       event_id: event_id
   	});
 };
 
 exports.new = function(req, res) {
-  res.render('events-new', 
+  res.render("events-new", 
     {
-      id: 'event_new',
-      title: 'Create Event',
+      id: "event_new",
+      title: "Create Event",
       breadcrumbs: [
         {title: "Home",url: "/"},
         {title: "Events",url: "/events"},
-        {title: 'Create Event'}
+        {title: "Create Event"}
       ]
     });
 }

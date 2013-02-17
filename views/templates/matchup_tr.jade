@@ -1,14 +1,12 @@
-td <%= number %>
 td
 	span.label.label-success <%= status %>
-td <%= franchise %>
-td <%= title %>
-td <%= team1 %>
-td <%= team2 %>
-td <%= bestOf %>
+td <%= teams[0] && teams[0].name || "TBA" %>
+td <%= teams[1] && teams[1].name || "TBA" %>
+td <%= best_of %>
+td <%= games.length %>
 td
 	.btn-group
-		| <a class="btn" href="/matchups/<%= id %>">Edit</a>
+		a.btn(href!='/matchups/<%= id %>') Edit
 		button.btn.dropdown-toggle(data-toggle='dropdown')
 			span.caret
 		ul.dropdown-menu(role='menu')
