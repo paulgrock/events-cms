@@ -7,7 +7,8 @@ var express = require('express')
     , http = require('http')
     , path = require('path')
     , fs = require('fs')
-    , buildJS = require('./build').build
+    , util = require('util')
+    , build = require('./build').build
     , index = require('./routes')
     , events = require('./routes/events')
     , matchups = require('./routes/matchups')
@@ -16,10 +17,60 @@ var express = require('express')
     , videos = require('./routes/videos')
     , api = require('./routes/api');
 
+
+var port = 3000;
+var authPath = "auth.json";
+
+//Read Flags
+(function() {
+    process.argv.forEach(function (val, index, array) {
+        switch(val) {
+            case "--port":
+                var flagVal = array[index+1];
+                if(flagVal && !isNaN(flagVal)) {
+                    port = flagVal;
+                }
+            break;
+
+            case "--authPath":
+                var flagVal = array[index+1];
+                if(flagVal) {
+                    authPath = flagVal;
+                }
+            break;
+        }
+    });
+})();
+
+//Read Basic Auth Credentials
+var authConfig = (function() {
+
+    if(!fs.existsSync(authPath)) {
+        util.log("Could not find authentication config " + authPath + ". Aborting.");
+        process.exit(0);
+    }
+
+    var rawJSON = fs.readFileSync(authPath);
+    var parsedJSON = {};
+
+    if(!rawJSON) return;
+
+    try {parsedJSON = JSON.parse(rawJSON);}
+    catch(e) {};
+
+    return {
+        user: parsedJSON.user || "hello",
+        pass: parsedJSON.pass || "world"
+    };
+
+})();
+
+
 var app = express();
 
-app.configure(function(){
-    app.set('port', process.env.PORT || 3000);
+app.configure(function() {
+    app.use(express.basicAuth(authConfig.user, authConfig.pass));
+    app.set('port', port);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
@@ -28,6 +79,7 @@ app.configure(function(){
     app.use(express.methodOverride());
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
+    
 });
 
 app.configure('development', function(){
