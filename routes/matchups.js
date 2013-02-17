@@ -1,5 +1,5 @@
 exports.list = function(req, res){
-  res.render('matchups', 
+  res.render('listing', 
   	{
       id: 'matchups',
   		title: 'Matchup Listing',

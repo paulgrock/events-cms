@@ -1,5 +1,5 @@
 exports.list = function(req, res){
-  res.render('events', 
+  res.render('listing', 
   	{
       id: 'events',
   		title: 'Event Listing',
