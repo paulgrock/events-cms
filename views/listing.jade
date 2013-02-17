@@ -1,0 +1,17 @@
+extends layouts/listing
+
+block listing-table
+
+	#listingTable
+
+block append scripts
+	script(src='/javascripts/vendor/moment/moment.min.js')
+	script
+		(function() {
+			var table = Koala.views.new('#{id}_table');
+			$('#listingTable').replaceWith(table.el);
+			table.render();
+		})();
+
+
+
