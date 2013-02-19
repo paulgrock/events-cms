@@ -52,6 +52,10 @@ var passThrough = function(req, res) {
 	var body = JSON.stringify(req.body);
 
 	fetchContent(options, body, function(chunks, headers, status) {
+		if(!status) {
+			res.send();
+			return;
+		}
 		res.set(headers);
 		res.status(status);
 		res.send(chunks);

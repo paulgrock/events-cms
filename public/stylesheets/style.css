@@ -25,6 +25,10 @@ h3 {
 	font-size: 18px;
 }
 
+.no-margin {
+	margin: 0;
+}
+
 .table td {
 	vertical-align: middle;
 }
@@ -47,5 +51,9 @@ h3 {
 }
 
 #teamWarning {
+	margin: 0;
+}
+
+#bestOf {
 	margin: 0;
 }

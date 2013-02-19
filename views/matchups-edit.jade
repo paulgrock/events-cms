@@ -16,6 +16,7 @@ block content
 		
 
 block append scripts
+	script(src='/javascripts/vendor/moment/moment.min.js')
 	script
 		$(function() {
 			var Matchup = Koala.models.new('matchup', {
@@ -38,7 +39,7 @@ block append scripts
 						var self = this;
 						$(this).button('loading');
 
-						Event.destroy(null, {
+						Matchup.destroy({
 							success: function(model, response) {
 								location.replace("#{href}");
 							},

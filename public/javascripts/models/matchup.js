@@ -6,7 +6,8 @@ Koala.models.add('matchup', Backbone.Model.extend({
 		teams: [
 			{name: "TBA"},
 			{name: "TBA"}
-		]
+		],
+		games: []
 	},
 
 	initialize: function() {

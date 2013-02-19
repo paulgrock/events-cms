@@ -55,9 +55,9 @@ block append scripts
 
 					$('#delete').click(function() {
 						var self = this;
-						$(this).button('loading');
+						$(this).button('deleting');
 
-						Event.destroy(null, {
+						Event.destroy({
 							success: function(model, response) {
 								location.replace("#{href}");
 							},

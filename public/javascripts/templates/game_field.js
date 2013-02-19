@@ -1,1 +1,0 @@
-Koala.templates.add('game_field', '<div class="control-group"><label class="control-label">Game <%= game %>:</label><div class="controls"><div class="btn-group"><button class="btn teamA"><%= teamA %></button><button class="btn teamB"><%= teamB %></button></div></div></div>');

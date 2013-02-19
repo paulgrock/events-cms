@@ -1,52 +1,38 @@
 extends layouts/basic
 
-block append head
-	link(rel='stylesheet', href='/stylesheets/vendor/ui-darkness/jquery-ui-1.10.0.custom.min.css')
-
-
 block content
-
 	h2 #{title}
 
 	.form-horizontal
-		#event_form_target
 		#matchup_form_target
 
 	.form-horizontal
 		.form-actions
-			button.btn.btn-success#save_event #{title}
+			button.btn.btn-success#save_matchup #{title}
 			&nbsp;
 			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
 			a.btn#cancel(href=href) Cancel
-
+		
 
 block append scripts
-	script(src='/javascripts/vendor/jquery/jquery-ui-1.10.0.custom.min.js')
 	script(src='/javascripts/vendor/moment/moment.min.js')
 	script
 		$(function() {
-			var Event = Koala.models.new('event');
-			var event_form = Koala.views.new('event_form', {
-				model: Event
-			});
-			$('#event_form_target').replaceWith(event_form.el);
-			event_form.render();
-
 			var Matchup = Koala.models.new('matchup');
+
 			var matchup_form = Koala.views.new('matchup_form', {
 				model: Matchup
 			});
+
 			$('#matchup_form_target').replaceWith(matchup_form.el);
 			matchup_form.render();
 
-			$('#save_event').click(function() {
+			$('#save_matchup').click(function() {
 				var self = this;
 
 				$(self).button('loading');
 
-				Event.set('matchup', _.clone(Matchup.attributes));
-
-				Event.save(null, {
+				Matchup.save(null, {
 					success: function(model, response) {
 						var id = response && response.id;
 						location.replace("#{href}"+"/"+id);
@@ -60,5 +46,4 @@ block append scripts
 				});
 			});
 
-			
 		});

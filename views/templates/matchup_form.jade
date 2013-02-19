@@ -26,3 +26,8 @@ legend Matchup
 					<li><a><%= i %></a></li>
 				<% } %>
 			<% } %>		
+<% if(games && games.length) { %>
+.control-group
+	label.control-label Games:
+	.controls.gameTable
+<% } %>

@@ -30,9 +30,9 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 		if(this.model.isNew()) this.listenTo(this.Teams, 'reset', this.changeTeams);
 
 		//Games
-		this.game_form = Koala.views.new('game_form', {
+		this.game_table = Koala.views.new('game_table', {
 			collection: this.model.games,
-			matchup: this.model.teams
+			matchup: this.model.attributes
 		});
 	},
 
@@ -42,16 +42,17 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 		$('.teamB', this.el).append(this.teamB_typeahead.el);
 		this.fillTeams();
 
-		this.$el.append(this.game_form.el);
-		this.game_form.render();
+		if(this.model.games.length) {
+			$('.gameTable', this.el).append(this.game_table.render().el);
+		}
 
 		return this;
 	},
 
 	fillTeams: function() {
 		var teamList = this.model.get('teams');
-		var teamA = teamList.shift();
-		var teamB = teamList.shift();
+		var teamA = teamList[0];
+		var teamB = teamList[1];
 		this.teamA_typeahead.setValue(teamA && teamA.name || "TBA");
 		this.teamB_typeahead.setValue(teamB && teamB.name || "TBA");
 

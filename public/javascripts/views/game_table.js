@@ -1,8 +1,10 @@
-Koala.views.add('game_form', Backbone.View.extend({
+Koala.views.add('game_table', Backbone.View.extend({
 
-	tagName: 'fieldset',
+	tagName: "table",
 
-	template: Koala.templates.get('game_form'),
+	className: "table table-hover",
+
+	template: Koala.templates.get('game_table'),
 
 	initialize: function(options) {
 		this.listenTo(this.collection, 'add', this.addOne);
@@ -12,11 +14,16 @@ Koala.views.add('game_form', Backbone.View.extend({
 
 	render: function() {
 		this.$el.html(this.template());
+		this.addAll();
+		return this;
 	},
 
 	addOne: function(model) {
-		var view = Koala.views.new('game_field', {model: model});
-		this.$el.append(view.render().el);
+		var view = Koala.views.new('game_tr', {
+			model: model,
+			matchup: this.matchup
+		});
+		$('tbody', this.el).append(view.render().el);
 	},
 
 	addAll: function() {
