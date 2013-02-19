@@ -8,7 +8,8 @@ exports.list = function(req, res){
   			{title: "Events"}
   		],
       filter: req.query.group,
-      type: "Event"
+      type: "Event",
+      info: "Information relating to specific Events, including Matchups and Games."
   	});
 };
 

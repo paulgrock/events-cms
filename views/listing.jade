@@ -1,17 +1,41 @@
-extends layouts/listing
+extends layouts/basic
 
-block listing-table
+block above_content
+	.add_item_prompt
+		.container
+			h1 #{type}s
+			p.lead #{info}
+	.page_menu
+		.container
+			strong Options:
+			a.btn(href='/#{id}/new') Create #{type}
 
+block content
+	#groupPills
 	#listingTable
 
 block append scripts
 	script(src='/javascripts/vendor/moment/moment.min.js')
 	script
-		(function() {
+		$(function() {
 			var table = Koala.views.new('#{id}_table');
 			$('#listingTable').replaceWith(table.el);
 			table.render();
-		})();
+		});
+
+	//Enable sorting by groups for events
+
+	if(id === "events")
+		script
+			$(function() {
+				var Groups = Koala.collections.new('groups');
+				var group_pills = Koala.views.new('group_pills', {
+					collection: Groups
+				});
+				Groups.fetch();
+
+				$('#groupPills').replaceWith(group_pills.el);
+			});
 
 
 

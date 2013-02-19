@@ -8,7 +8,8 @@ exports.list = function(req, res){
   			{title: "Matchups"}
   		],
       filter: req.query.group,
-      type: "Matchup"
+      type: "Matchup",
+      info: "Information relating to specific Matchups, including Games."
   	});
 };
 
