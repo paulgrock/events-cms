@@ -1,1 +1,1 @@
-Koala.templates.add('team_tr', '');
+Koala.templates.add('team_tr', '<td><%= name %></td><td><div class="btn-group"><a href="/teams/<%= id %>" class="btn">Edit</a><button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button><ul role="menu" class="dropdown-menu"><li><a class="delete">Delete</a></li></ul></div></td>');

@@ -1,16 +1,16 @@
-Koala.views.add('matchups_table', Backbone.View.extend({
+Koala.views.add('teams_table', Backbone.View.extend({
 
 	tagName: "table",
 
-	template: Koala.templates.get('matchups_table'),
+	template: Koala.templates.get('teams_table'),
 	
 	className: "table table-hover",
 
 	initialize: function() {
-		var Collection = Koala.collections.new('matchups');
+		var Collection = Koala.collections.new('teams');
 		this.tbody = Koala.views.new('tbody', {
 			collection: Collection,
-			rowView: 'matchup_tr'
+			rowView: 'team_tr'
 		});
 
 		Collection.fetch({

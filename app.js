@@ -13,7 +13,6 @@ var express = require('express')
     , events = require('./routes/events')
     , matchups = require('./routes/matchups')
     , teams = require('./routes/teams')
-    , shows = require('./routes/shows')
     , videos = require('./routes/videos')
     , api = require('./routes/api');
 
@@ -91,7 +90,6 @@ function Page(id, title, url, filters) {
     this.id = id;
     this.title = title;
     this.url = url;
-    this.filters = filters;
 }
 
 app.locals.pages = {
@@ -111,9 +109,8 @@ app.get('/matchups', matchups.list);
 app.get('/matchups/new', matchups.new)
 app.get('/matchups/:matchup_id', matchups.edit)
 app.get('/teams', teams.list);
+app.get('/teams/new', teams.new);
 app.get('/teams/:team_id', teams.edit);
-app.get('/shows', shows.list);
-app.get('/shows/:show_id', shows.edit);
 app.get('/videos', videos.list);
 app.get('/videos/:video_id', videos.edit);
 

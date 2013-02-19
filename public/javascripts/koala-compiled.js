@@ -63,7 +63,7 @@
 	};
 
 
-})(jQuery, Backbone);Koala.templates.add('confirm_modal', '<div class="modal-header"><button type="button" data-dismiss="modal" aria-hidden="true" class="close">x</button><h2><%= action %></h2></div><div class="modal-body"><div class="lead"><%= message %></div><p class="text-info">&quot;<%= snippet %>&quot;</p></div><div class="modal-footer"><button data-dismiss="modal" aria-hidden="true" class="btn cancel">Cancel</button><button class="btn btn-danger confirm">Confirm</button></div>');Koala.templates.add('date_form', '<div class="control-group"><label class="control-label"><%= type %> Date:</label><div class="controls"><div class="input-prepend input-append"><span class="span2 add-on">MM/DD/YYYY</span><input type="text" placeholder="Enter a start date..." value="<%= data.date %>" class="span2 date"/><button type="button" class="btn todayBtn">Today</button></div></div></div><div class="control-group"><label class="control-label"><%= type %> Time:</label><div class="controls"><div class="input-prepend input-append"><span class="span2 add-on">HH:MM</span><input type="text" placeholder="HH:MM" value="<%= data.time %>" class="span1 time"/><button type="button" class="btn nowBtn">Now</button></div><span class="help-inline">(24hr)</span><div class="timeWarning"><div class="span4"></div></div></div></div>');Koala.templates.add('event_form', '<fieldset><legend>General</legend><div class="control-group"><label for="event_title" class="control-label">Title:</label><div class="controls"><input type="text" id="event_title" placeholder="Enter an Event Title..." value="<%= title %>" class="span3"/></div></div><div class="control-group"><label for="stream_select" class="control-label">Stream:</label><div id="event-stream-wrapper" class="controls"></div></div><div class="control-group"><label for="group_select" class="control-label">Group(s):</label><div id="event-group-wrapper" class="controls"></div></div></fieldset><fieldset><legend>Date and Time</legend><div id="startDate"></div><hr/><div id="endDate"></div></fieldset>');Koala.templates.add('event_tr', '<td><span class=\'label <% switch(status) { case \'Pending\':  %>label-inverse<%  break;   case \'Underway\':  %>label-important<%  break;   case \'Starting Soon\':  %>label-warning<%  break; }%>\'><%= status %></span></td><td><%= franchise %></td><td><%= title %></td><td><%= starts_at %></td><td><div class="btn-group"><a href="/events/<%= id %>" class="btn">Edit</a><button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button><ul role="menu" class="dropdown-menu"><li><a class="delete">Delete</a></li></ul></div></td>');Koala.templates.add('events_table', '<thead><th>Status</th><th>Franchise</th><th>Title</th><th>Starts</th><th>Action</th></thead>');Koala.templates.add('game_action_td_finished', '-');Koala.templates.add('game_action_td_ready', '<button class="btn start_select">Start Game</button>');Koala.templates.add('game_action_td_underway', '<div class="btn-group"><a data-toggle="dropdown" href="#" class="btn btn-primary dropdown-toggle">Choose Winner <span class="caret"></span></a><ul class="dropdown-menu"><li> <a class="teamA_select"><%= teamA.name %></a></li><li><a class="teamB_select"><%= teamB.name %></a></li></ul></div>');Koala.templates.add('game_table', '<thead><tr><th>#</th><th>Status</th><th>Started</th><th>Ended</th><th>Winner</th><th>Action</th></tr></thead><tbody></tbody>');Koala.templates.add('game_tr', '<td><%= number %></td><td><span class=\'label <%   switch(status) {   case \'underway\':    %>label-info<%    break;       case \'ready\':    %>label-warning<%    break;   }  %>\'><%= status.toUpperCase() %></span></td><td><%= starts_at %></td><td><%= ends_at %></td><td><%= winner %></td><td class="action"></td>');Koala.templates.add('group_pill', '<a href="<%= href %>"><%= name %></a>');Koala.templates.add('matchup_form', '<legend>Matchup</legend><div class="controls"><div class="alert alert-info"><button type="button" data-dismiss="alert" class="close">&times;</button><strong>Please Note!</strong> Teams entered into the matchup below must have first been added through the \'Team Creation\' process!</div></div><div class="control-group"><label class="control-label">Team A Name:</label><div class="controls teamA"></div></div><div class="control-group"><label class="control-label">Team B Name:</label><div class="controls teamB"></div></div><div class="control-group"><label class="control-label">Best Of:</label><div class="controls"><ul id="bestOf" class="nav nav-pills"><% for(var i = 1; i <= 13; i+=2) { %> <% if(i === best_of) { %>  <li class="active"><a><%= i %></a></li> <% } else { %>  <li><a><%= i %></a></li> <% } %><% } %></ul></div></div><% if(games && games.length) { %><div class="control-group"><label class="control-label">Games:</label><div class="controls gameTable"></div></div><% } %>');Koala.templates.add('matchup_tr', '<td><span class="label label-success"><%= status %></span></td><td><%= teams[0] && teams[0].name || "TBA" %></td><td><%= teams[1] && teams[1].name || "TBA" %></td><td><%= best_of %></td><td><%= games.length %></td><td><div class="btn-group"><a href="/matchups/<%= id %>" class="btn">Edit</a><button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button><ul role="menu" class="dropdown-menu"><li><a class="delete">Delete</a></li></ul></div></td>');Koala.templates.add('matchups_table', '<thead><th>Status</th><th>Team A</th><th>Team B</th><th>Best Of</th><th>Played</th><th>Action</th></thead>');Koala.templates.add('show_tr', '');Koala.templates.add('team_tr', '');Koala.templates.add('video_tr', '');Koala.templates.add('warning', '<button type="button" data-dismiss="alert" class="close">&times;</button><strong><%= header %><%= message %></strong>');Koala.models.add('event', Backbone.Model.extend({
+})(jQuery, Backbone);Koala.templates.add('confirm_modal', '<div class="modal-header"><button type="button" data-dismiss="modal" aria-hidden="true" class="close">x</button><h2><%= action %></h2></div><div class="modal-body"><div class="lead"><%= message %></div><p class="text-info">&quot;<%= snippet %>&quot;</p></div><div class="modal-footer"><button data-dismiss="modal" aria-hidden="true" class="btn cancel">Cancel</button><button class="btn btn-danger confirm">Confirm</button></div>');Koala.templates.add('date_form', '<div class="control-group"><label class="control-label"><%= type %> Date:</label><div class="controls"><div class="input-prepend input-append"><span class="span2 add-on">MM/DD/YYYY</span><input type="text" placeholder="Enter a start date..." value="<%= data.date %>" class="span2 date"/><button type="button" class="btn todayBtn">Today</button></div></div></div><div class="control-group"><label class="control-label"><%= type %> Time:</label><div class="controls"><div class="input-prepend input-append"><span class="span2 add-on">HH:MM</span><input type="text" placeholder="HH:MM" value="<%= data.time %>" class="span1 time"/><button type="button" class="btn nowBtn">Now</button></div><span class="help-inline">(24hr)</span><div class="timeWarning"><div class="span4"></div></div></div></div>');Koala.templates.add('event_form', '<fieldset><legend>General</legend><div class="control-group"><label for="event_title" class="control-label">Title:</label><div class="controls"><input type="text" id="event_title" placeholder="Enter an Event Title..." value="<%= title %>" class="span3"/></div></div><div class="control-group"><label for="stream_select" class="control-label">Stream:</label><div id="event-stream-wrapper" class="controls"></div></div><div class="control-group"><label for="group_select" class="control-label">Group(s):</label><div id="event-group-wrapper" class="controls"></div></div></fieldset><fieldset><legend>Date and Time</legend><div id="startDate"></div><hr/><div id="endDate"></div></fieldset>');Koala.templates.add('event_tr', '<td><span class=\'label <% switch(status) { case \'Pending\':  %>label-inverse<%  break;   case \'Underway\':  %>label-important<%  break;   case \'Starting Soon\':  %>label-warning<%  break; }%>\'><%= status %></span></td><td><%= franchise %></td><td><%= title %></td><td><%= starts_at %></td><td><div class="btn-group"><a href="/events/<%= id %>" class="btn">Edit</a><button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button><ul role="menu" class="dropdown-menu"><li><a class="delete">Delete</a></li></ul></div></td>');Koala.templates.add('events_table', '<thead><th>Status</th><th>Franchise</th><th>Title</th><th>Starts</th><th>Action</th></thead>');Koala.templates.add('game_action_td_finished', '-');Koala.templates.add('game_action_td_ready', '<button class="btn start_select">Start Game</button>');Koala.templates.add('game_action_td_underway', '<div class="btn-group"><a data-toggle="dropdown" href="#" class="btn btn-primary dropdown-toggle">Choose Winner <span class="caret"></span></a><ul class="dropdown-menu"><li> <a class="teamA_select"><%= teamA.name %></a></li><li><a class="teamB_select"><%= teamB.name %></a></li></ul></div>');Koala.templates.add('game_table', '<thead><tr><th>#</th><th>Status</th><th>Started</th><th>Ended</th><th>Winner</th><th>Action</th></tr></thead><tbody></tbody>');Koala.templates.add('game_tr', '<td><%= number %></td><td><span class=\'label <%   switch(status) {   case \'underway\':    %>label-info<%    break;       case \'ready\':    %>label-warning<%    break;   }  %>\'><%= status.toUpperCase() %></span></td><td><%= starts_at %></td><td><%= ends_at %></td><td><%= winner %></td><td class="action"></td>');Koala.templates.add('group_pill', '<a href="<%= href %>"><%= name %></a>');Koala.templates.add('matchup_form', '<legend>Matchup</legend><div class="controls"><div class="alert alert-info"><button type="button" data-dismiss="alert" class="close">&times;</button><strong>Please Note!</strong> Teams entered into the matchup below must have first been added through the \'Team Creation\' process!</div></div><div class="control-group"><label class="control-label">Team A Name:</label><div class="controls teamA"></div></div><div class="control-group"><label class="control-label">Team B Name:</label><div class="controls teamB"></div></div><div class="control-group"><label class="control-label">Best Of:</label><div class="controls"><ul id="bestOf" class="nav nav-pills"><% for(var i = 1; i <= 13; i+=2) { %> <% if(i === best_of) { %>  <li class="active"><a><%= i %></a></li> <% } else { %>  <li><a><%= i %></a></li> <% } %><% } %></ul></div></div><% if(games && games.length) { %><div class="control-group"><label class="control-label">Games:</label><div class="controls gameTable"></div></div><% } %>');Koala.templates.add('matchup_tr', '<td><span class="label label-success"><%= status %></span></td><td><%= teams[0] && teams[0].name || "TBA" %></td><td><%= teams[1] && teams[1].name || "TBA" %></td><td><%= best_of %></td><td><%= games.length %></td><td><div class="btn-group"><a href="/matchups/<%= id %>" class="btn">Edit</a><button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button><ul role="menu" class="dropdown-menu"><li><a class="delete">Delete</a></li></ul></div></td>');Koala.templates.add('matchups_table', '<thead><th>Status</th><th>Team A</th><th>Team B</th><th>Best Of</th><th>Played</th><th>Action</th></thead>');Koala.templates.add('show_tr', '');Koala.templates.add('team_tr', '<td><%= name %></td><td><div class="btn-group"><a href="/teams/<%= id %>" class="btn">Edit</a><button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button><ul role="menu" class="dropdown-menu"><li><a class="delete">Delete</a></li></ul></div></td>');Koala.templates.add('teams_table', '<colgroup><col/><col width="1"/></colgroup><thead><th>Name</th><th>Action</th></thead>');Koala.templates.add('video_tr', '');Koala.templates.add('warning', '<button type="button" data-dismiss="alert" class="close">&times;</button><strong><%= header %><%= message %></strong>');Koala.models.add('event', Backbone.Model.extend({
 	urlRoot: '/api/events',
 	defaults: {
 		title: "",
@@ -99,7 +99,9 @@ Koala.models.add('group', Backbone.Model.extend({
 
 Koala.models.add('stream', Backbone.Model.extend({
 	
-}));Koala.models.add('team', Backbone.Model.extend({}));
+}));Koala.models.add('team', Backbone.Model.extend({
+	urlRoot: '/api/teams',
+}));
 Koala.models.add('warning', Backbone.Model.extend({
 	defaults: {
 		header: '',
@@ -440,7 +442,9 @@ Koala.collections.add('streams', Backbone.Collection.extend({
 }));Koala.views.add('events_table', Backbone.View.extend({
 
 	tagName: "table",
+
 	template: Koala.templates.get('events_table'),
+	
 	className: "table table-hover",
 
 	initialize: function() {
@@ -825,7 +829,9 @@ Koala.views.add('matchup_tr', Backbone.View.extend({
 }));Koala.views.add('matchups_table', Backbone.View.extend({
 
 	tagName: "table",
+
 	template: Koala.templates.get('matchups_table'),
+	
 	className: "table table-hover",
 
 	initialize: function() {
@@ -922,7 +928,40 @@ Koala.views.add('matchup_tr', Backbone.View.extend({
 
 }));
 
-Koala.views.add('team_typeahead', Backbone.View.extend({
+Koala.views.add('team_tr', Backbone.View.extend({
+	
+	tagName: 'tr',
+
+	template: Koala.templates.get('team_tr'),
+
+	events: {
+		"click .delete" : function() {
+			Koala.views.new('confirm_delete_modal', {
+				model: this.model,
+				modal: {
+					action: "Confirm Team Deletion.",
+					message: "Are you sure you want to permanently delete this team?",
+					snippet: this.model.attributes.name,
+				}
+			});
+		}
+	},
+
+	initialize: function() {
+		this.listenTo(this.model, "change", this.render);
+		this.listenTo(this.model, "destroy", this.destroy);
+	},
+
+	render: function() {
+		this.$el.html(this.template(this.model.attributes));
+		return this;
+	},
+
+	destroy: function() {
+		this.remove();
+	}
+
+}));Koala.views.add('team_typeahead', Backbone.View.extend({
 	
 	tagName: 'input',
 	className: 'span3 team_typeahead',
@@ -966,7 +1005,33 @@ Koala.views.add('team_typeahead', Backbone.View.extend({
 	}
 
 }));
-Koala.views.add('warning', Backbone.View.extend({
+Koala.views.add('teams_table', Backbone.View.extend({
+
+	tagName: "table",
+
+	template: Koala.templates.get('teams_table'),
+	
+	className: "table table-hover",
+
+	initialize: function() {
+		var Collection = Koala.collections.new('teams');
+		this.tbody = Koala.views.new('tbody', {
+			collection: Collection,
+			rowView: 'team_tr'
+		});
+
+		Collection.fetch({
+			data: location.search.replace(/^\?(.*)/gi, '$1')
+		});
+	},
+
+	render: function() {
+		this.$el.html(this.template());
+		this.$el.append(this.tbody.el);
+		return this;
+	}
+
+}));Koala.views.add('warning', Backbone.View.extend({
 	className: 'alert',
 
 	template: Koala.templates.get('warning'),

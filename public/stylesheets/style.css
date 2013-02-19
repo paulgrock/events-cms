@@ -29,6 +29,10 @@ h3 {
 	font-size: 18px;
 }
 
+th {
+	white-space: nowrap;
+}
+
 .nav-pills .active a,
 .nav-pills .active a:hover {
 	background-color: #ba0101;

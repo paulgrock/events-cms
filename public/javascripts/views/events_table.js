@@ -1,7 +1,9 @@
 Koala.views.add('events_table', Backbone.View.extend({
 
 	tagName: "table",
+
 	template: Koala.templates.get('events_table'),
+	
 	className: "table table-hover",
 
 	initialize: function() {
