@@ -1,14 +1,14 @@
-
-/*
- * GET home page.
- */
+var activity_logger = require("../lib/activity_logger");
 
 exports.index = function(req, res){
   res.render('index', {
-  	id: 'home',
-  	title: 'Home',
+  	id: 'activity',
+  	title: 'Activity List',
 	breadcrumbs: [
-		{title: "Home"}
-	]
+		{title: "Activity"}
+	],
+	type: "Log",
+	info: "Showing the latest activity on Koala.",
+	logs: activity_logger.retrieve()
   });
 };

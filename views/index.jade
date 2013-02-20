@@ -1,6 +1,37 @@
 extends layouts/basic
 
+block above_content
+	.add_item_prompt
+		.container
+			h1 #{type}s
+			p.lead #{info}
+
 block content
-	.hero-unit
-		h1 Welcome,
-		p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in ante sagittis massa fringilla elementum luctus quis dolor. Donec eu arcu sed nisl sollicitudin dictum. Suspendisse sed iaculis velit. Praesent auctor rutrum velit, sit amet mollis sapien egestas quis. Pellentesque nec turpis a nulla tincidunt rutrum vel et nisl. Mauris eget massa vitae velit blandit ultricies. Nullam laoreet malesuada vulputate. Curabitur dictum ipsum sed nisi consequat vel gravida augue convallis. Sed eget ornare metus. Praesent pellentesque ultrices purus, in vulputate nibh semper ac. Nam eget ligula id ligula aliquet consectetur vitae quis quam.
+	table.table.table-striped
+		thead
+			tr
+				th Time
+				th IP
+				th Method
+				th End Point
+				th Status
+		tbody
+			each log in logs
+				tr
+					td.logTS=log.ts
+					td=log.ip
+					td=log.method
+					td
+						a(href=log.endPoint)=log.endPoint
+					td=log.status
+
+block append scripts
+	script(src='/javascripts/vendor/moment/moment.min.js')
+	script
+		$(function() {
+			$('.logTS').each(function() {
+				this.innerHTML = moment(Number(this.innerHTML)).calendar();
+			});
+		});
+
+
