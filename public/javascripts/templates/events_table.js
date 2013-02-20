@@ -1,0 +1,1 @@
+Koala.templates.add('events_table', '<thead><th>Status</th><th>Franchise</th><th>Title</th><th>Starts</th><th>Action</th></thead>');

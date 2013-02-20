@@ -1,4 +1,4 @@
-.navbar.navbar-fixed-top
+.navbar.navbar-fixed-top.navbar-inverse
 	.navbar-inner
 		.container
 				a.brand(href='/')
@@ -7,21 +7,5 @@
 					ul.nav
 						for page in pages
 							- var c = (page.id === id) ? 'active' : '';
-
-							- if (!page.filters)
 								li(class=c)
 									a(href=page.url)=page.title
-
-							- else 
-								- c += ' dropdown';
-								li(class=c)
-									a.dropdown-toggle(data-toggle='dropdown', href=page.url)
-										=page.title
-										b.caret
-									ul.dropdown-menu
-										for filter in page.filters
-											li
-												- if(filter.slug)
-													a(href=page.url+'?group='+filter.slug)=filter.title
-												- else
-													a(href=page.url)=filter.title

@@ -1,0 +1,21 @@
+fieldset
+	legend General
+	.control-group
+		label.control-label(for='event_title') Title:
+		.controls
+			input.span3(type='text', id='event_title', placeholder='Enter an Event Title...', value!='<%= title %>')
+
+	.control-group
+		label.control-label(for='stream_select') Stream:
+		.controls#event-stream-wrapper
+
+	.control-group
+		label.control-label(for='group_select') Group(s):
+		.controls#event-group-wrapper
+
+
+fieldset
+	legend Date and Time
+	#startDate
+	hr
+	#endDate

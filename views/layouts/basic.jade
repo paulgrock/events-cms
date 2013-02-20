@@ -11,6 +11,8 @@ html
 
 		include ../includes/topnav
 
+		block above_content
+
 		.container
 
 			include ../includes/breadcrumbs
@@ -20,7 +22,8 @@ html
 			hr
 			footer
 				block footer
-					p &copy; IGN Entertainment 2013
+					p &copy; International Pro League 2013
+
 
 
 		block scripts
@@ -28,4 +31,4 @@ html
 			script(src='/javascripts/vendor/bootstrap/bootstrap.js')
 			script(src='/javascripts/vendor/underscore/underscore-min.js')
 			script(src='/javascripts/vendor/backbone/backbone-min.js')
-			script(src='/javascripts/koala.js')
+			script(src='/javascripts/koala-compiled.js')

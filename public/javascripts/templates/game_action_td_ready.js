@@ -1,0 +1,1 @@
+Koala.templates.add('game_action_td_ready', '<button class="btn start_select">Start Game</button>');

@@ -5,57 +5,24 @@ block append head
 
 
 block content
-
 	h2 Edit Event
+	p.lead Changes made to this event will be instantly saved.
 
 	.form-horizontal
 		#event_form_target
-
-		fieldset
-			legend Matchup
-			#matchup_form_target
+		#matchup_form_target
 
 	.form-horizontal
 		.form-actions
-			button.btn.btn-danger#event-delete Delete
+			button.btn.btn-danger#delete Delete
 			&nbsp;
 			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
 			a.btn(href=href) Go Back
-
+		
 
 block append scripts
 	script(src='/javascripts/vendor/jquery/jquery-ui-1.10.0.custom.min.js')
 	script(src='/javascripts/vendor/moment/moment.min.js')
-
-	script(src='/javascripts/models/event.js')
-	script(src='/javascripts/models/matchup.js')
-
-	include templates/warning
-	script(src='/javascripts/models/warning.js')
-	script(src='/javascripts/views/warning.js')
-
-	include templates/date_form
-	script(src='/javascripts/views/date_form.js')
-
-	include templates/matchup_form
-	script(src='/javascripts/views/matchup_form.js')
-
-	script(src='/javascripts/models/stream.js')
-	script(src='/javascripts/collections/streams.js')
-	script(src='/javascripts/views/stream_option.js')
-	script(src='/javascripts/views/stream_select.js')
-
-	script(src='/javascripts/models/group.js')
-	script(src='/javascripts/collections/groups.js')
-	script(src='/javascripts/views/group_option.js')
-	script(src='/javascripts/views/group_select.js')
-
-	script(src='/javascripts/models/team.js')
-	script(src='/javascripts/collections/teams.js')
-	script(src='/javascripts/views/team_typeahead.js')
-
-	include templates/event-form
-	script(src='/javascripts/views/event_form.js')
 	script
 		$(function() {
 			//Event
@@ -71,17 +38,37 @@ block append scripts
 
 				success: function(model, data) {
 
+					$('#event_form_target').replaceWith(event_form.el);
+					event_form.render();
+
 					if(data && data.matchup && data.matchup.id) {
-						var Matchup = Koala.models.new('matchup');
-						Matchup.urlRoot = '/api/matchups';
-						Matchup.id = data.matchup.id;
+						var Matchup = Koala.models.new('matchup', data.matchup);
 
 						var matchup_form = Koala.views.new('matchup_form', {
 							model: Matchup
 						});
 
-						Matchup.fetch();
+						$('#matchup_form_target').replaceWith(matchup_form.el);
+						matchup_form.render();
+
 					}
+
+					$('#delete').click(function() {
+						var self = this;
+						$(this).button('deleting');
+
+						Event.destroy({
+							success: function(model, response) {
+								location.replace("#{href}");
+							},
+							error: function(model, xhr) {
+								window.scrollTo(0,0);
+							},
+							complete: function() {
+								$(self).button('reset');
+							}
+						});
+					});
 				}
 			});
 

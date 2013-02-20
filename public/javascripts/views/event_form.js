@@ -1,11 +1,10 @@
 Koala.views.add('event_form', Backbone.View.extend({
 
-	el: $('#event_form_target'),
-	template: _.template($('#event_form').html()),
-
 	events: {
 		'keyup #event_title' : 'setTitle',
 	},
+
+	template: Koala.templates.get('event_form'),
 
 	initialize: function() {
 		//Streams
@@ -14,9 +13,7 @@ Koala.views.add('event_form', Backbone.View.extend({
 			collection: Streams
 		});
 		Streams.fetch({
-			data: {
-				test: true
-			}
+			fields: "id,name"
 		});
 
 		//Franchise
@@ -26,7 +23,7 @@ Koala.views.add('event_form', Backbone.View.extend({
 		});
 		Groups.fetch({
 			data: {
-				fields: ['id','name']
+				fields: "id,name"
 			}
 		});
 
@@ -34,13 +31,13 @@ Koala.views.add('event_form', Backbone.View.extend({
 		var startDate_form = Koala.views.new('date_form', {
 			model: this.model,
 			dateKey: 'starts_at',
-			warningHeader: "Starting:",
+			warningHeader: "Starting: ",
 			type: 'Start'
 		});
 		var endDate_form = Koala.views.new('date_form', {
 			model: this.model,
 			dateKey: 'ends_at',
-			warningHeader: "Ending:",
+			warningHeader: "Ending: ",
 			type: 'End'
 		});
 
@@ -60,14 +57,16 @@ Koala.views.add('event_form', Backbone.View.extend({
 
 		//Listeners
 		var self = this;
-		this.listenTo(this.model, 'change', this.render);
 		this.listenTo(Streams, 'reset', this.prefill.setStreamIndex);
 		this.listenTo(Groups, 'reset', this.prefill.setGroupIndex);
 
 		this.listenTo(stream_select, 'change', this.setStream);
-		this.listenTo(group_select, 'change', this.setGroup);
+		this.listenTo(group_select, 'change', this.setGroups);
 		this.listenTo(startDate_form, 'change', this.setStarts_at);
 		this.listenTo(endDate_form, 'change', this.setEnds_at);
+
+		//Set defaults
+		if(this.model.isNew()) this.listenTo(Streams, 'reset', this.setStream); //New streams require a stream by default
 
 	},
 
@@ -84,7 +83,7 @@ Koala.views.add('event_form', Backbone.View.extend({
 		$('.todayBtn', this.views.endDate_form.el)
 		.click(function() {
 			var startDate = $('.date', self.views.startDate_form.el).val();
-			$('.date', self.views.endDate_form.el).val(startDate);
+			$('.date', self.views.endDate_form.el).val(startDate).trigger('change');
 		})
 		.html('Same Day');
 
@@ -104,35 +103,39 @@ Koala.views.add('event_form', Backbone.View.extend({
 		}
 	},
 
-
 	setTitle: function() {
 		var title = $('#event_title', this.el).val();
-		this.save({title: title});
+		this.model.set({title: title});
+		this.save();
 	},
+
 	setStream: function() {
 		var stream = this.views.stream_select.getSelectedStream();
-		this.save({stream: stream});
+		this.model.set({stream: stream});
+		this.save();
 	},
+
 	setGroups: function() {
 		var groups = this.views.group_select.getSelectedGroups();
-		this.save({groups: groups});
+		this.model.set({groups: groups});
+		this.save();
 	},
+
 	setStarts_at: function() {
 		var starts_at = this.views.startDate_form.generateDate();
-		this.save({starts_at: starts_at});
+		this.model.set({starts_at: starts_at});
+		this.save();
 	},
+
 	setEnds_at: function() {
 		var ends_at = this.views.endDate_form.generateDate();
-		this.save({ends_at: ends_at});
+		this.model.set({ends_at: ends_at});
+		this.save();
 	},
 
-
-
 	save: function(data) {
-		if(this.model.isNew()) return;
-		this.model.save(data, {
-			silent: true
-		});
+		if(this.model.isNew() || !this.model.hasChanged()) return;
+		this.model.save();
 	}
 
 

@@ -1,4 +1,4 @@
-//Koala FrontEnd - James Burroughs 2013
+//Koala FrontEnd - James Burroughs 2013!
 
 (function($, Backbone) {
 
@@ -7,6 +7,7 @@
 	var models = {};
 	var collections = {};
 	var views = {};
+	var templates = {};
 
 	//Expose Koala
 	window.Koala = {
@@ -21,9 +22,6 @@
 			new: function(key, models, options) {
 				if(!collections[key]) return;
 				return new collections[key](models, options);
-			},
-			remove: function(key) {
-				delete collections[key];
 			}
 		},
 
@@ -37,9 +35,6 @@
 			new: function(key, attributes, options) {
 				if(!models[key]) return;
 				return new models[key](attributes, options);
-			},
-			remove: function(key) {
-				delete models[key];
 			}
 		},
 
@@ -53,9 +48,15 @@
 			new: function(key, options) {
 				if(!views[key]) return;
 				return new views[key](options);
+			}
+		},
+
+		templates: {
+			add: function(key, templateString) {
+				templates[key] = _.template(templateString);
 			},
-			remove: function(key) {
-				delete views[key];
+			get: function(key) {
+				return templates[key];
 			}
 		}
 

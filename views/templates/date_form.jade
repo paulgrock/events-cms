@@ -1,20 +1,19 @@
-script(type='text/template', id='date_form')
-	.control-group
-		label.control-label <%= type %> Date:
-		.controls
-			.input-prepend.input-append
-				span.span2.add-on MM/DD/YYYY
-				input.span2.date(type='text', placeholder='Enter a start date...', value!='<%= data.date %>')
-				button.btn.todayBtn(type='button') Today
+.control-group
+	label.control-label <%= type %> Date:
+	.controls
+		.input-prepend.input-append
+			span.span2.add-on MM/DD/YYYY
+			input.span2.date(type='text', placeholder='Enter a start date...', value!='<%= data.date %>')
+			button.btn.todayBtn(type='button') Today
 
-	.control-group
-		label.control-label <%= type %> Time:
-		.controls
-			.input-prepend.input-append	
-				span.span2.add-on HH:MM
-				input.span1.time(type='text', placeholder='HH:MM', value!='<%= data.time %>')
-				button.btn.nowBtn(type='button') Now
-			span.help-inline (24hr)
+.control-group
+	label.control-label <%= type %> Time:
+	.controls
+		.input-prepend.input-append	
+			span.span2.add-on HH:MM
+			input.span1.time(type='text', placeholder='HH:MM', value!='<%= data.time %>')
+			button.btn.nowBtn(type='button') Now
+		span.help-inline (24hr)
 
-			.timeWarning
-				.span4
+		.timeWarning
+			.span4

@@ -2,6 +2,8 @@ Koala.views.add('event_tr', Backbone.View.extend({
 	
 	tagName: 'tr',
 
+	template: Koala.templates.get('event_tr'),
+
 	events: {
 		"click .delete" : function() {
 			Koala.views.new('confirm_delete_modal', {
@@ -27,8 +29,6 @@ Koala.views.add('event_tr', Backbone.View.extend({
 		this.data.franchise = this.model.attributes.groups[0] && this.model.attributes.groups[0].name;
 		this.data.status = this.status(this.model.attributes.starts_at, this.model.attributes.ends_at);
 	},
-
-	template: _.template($('#event_tr').html()),
 
 	render: function() {
 		this.$el.html(this.template(this.data));

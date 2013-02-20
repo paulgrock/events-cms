@@ -1,0 +1,49 @@
+extends layouts/basic
+
+block content
+	h2 #{title}
+
+	.form-horizontal
+		#matchup_form_target
+
+	.form-horizontal
+		.form-actions
+			button.btn.btn-success#save_matchup #{title}
+			&nbsp;
+			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
+			a.btn#cancel(href=href) Cancel
+		
+
+block append scripts
+	script(src='/javascripts/vendor/moment/moment.min.js')
+	script
+		$(function() {
+			var Matchup = Koala.models.new('matchup');
+
+			var matchup_form = Koala.views.new('matchup_form', {
+				model: Matchup
+			});
+
+			$('#matchup_form_target').replaceWith(matchup_form.el);
+			matchup_form.render();
+
+			$('#save_matchup').click(function() {
+				var self = this;
+
+				$(self).button('loading');
+
+				Matchup.save(null, {
+					success: function(model, response) {
+						var id = response && response.id;
+						location.replace("#{href}"+"/"+id);
+					},
+					error: function(model, xhr) {
+						window.scrollTo(0,0);
+					},
+					complete: function() {
+						$(self).button('reset');
+					}
+				});
+			});
+
+		});

@@ -24,23 +24,19 @@ Koala.views.add('stream_select', Backbone.View.extend({
 	setIndex: function(id) {
 		if(!id) return;
 
-		var self = this;
-
-		this.collection.each(function(stream, i) {
-			if(stream.attributes.id === id) {
-				self.el.selectedIndex = i;
-				return;
+		for(var i = 0, len = this.el.options.length; i < len; i++) {
+			var option = this.el.options[i];
+			if(option.value === id) {
+				option.selected = true;
+				break;
 			}
-		});
+		}
 	},
 
 	getSelectedStream: function() {
-		var name = $(this.$el.selectedOptions[0]).val();
-		var selected = this.collection.find(function(stream) {
-			return stream.attributes.name === name;
-		});
-
-		if(selected) return {id: selected.attributes.id};
+		var id = $(this.el.selectedOptions[0]).val();
+		if(!id) return;
+		return {id: id};
 	},
 
 	onChange: function() {
