@@ -36,7 +36,7 @@ exports.new = function(req, res) {
       title: "Create Team",
       breadcrumbs: [
         {title: "Home",url: "/"},
-        {title: "Teams",url: "/team"},
+        {title: "Teams",url: "/teams"},
         {title: "Create Team"}
       ]
     });
