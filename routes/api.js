@@ -1,5 +1,6 @@
 var http = require('http');
 var querystring = require('querystring');
+var activity_logger = require('../lib/activity_logger');
 
 var fetchContent = function(options, payload, cb) {
 	var options = options || {};
@@ -59,6 +60,17 @@ var passThrough = function(req, res) {
 		res.set(headers);
 		res.status(status);
 		res.send(chunks);
+
+		//Log
+		if(options.method.toUpperCase() !== "GET") {
+			activity_logger.append({
+				ip: req.ip,
+				endPoint: req.path,
+				method: options.method.toUpperCase(),
+				status: status
+			});
+		}
+
 	});
 };
 
