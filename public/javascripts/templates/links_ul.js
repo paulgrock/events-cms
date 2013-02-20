@@ -1,0 +1,1 @@
+Koala.templates.add('links_ul', '<% if(prev) {%><li class="previous"><a href="<%= prev %>">&larr; Previous</a></li><% }else{ %><li class="previous disabled"><a>&larr; Previous</a></li><% } %><% if(next) {%><li class="next"><a href="<%= next %>">Next &rarr;</a></li><% }else{ %><li class="next disabled"><a>Next &rarr;</a></li><% } %>');
