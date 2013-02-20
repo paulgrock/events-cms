@@ -29,7 +29,7 @@ var fetchContent = function(options, payload, cb) {
 	req.write(payload);
 	req.end();
 
-	console.log(options);
+	//console.log(options);
 };
 
 

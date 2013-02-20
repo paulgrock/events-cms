@@ -80,7 +80,7 @@ var publicJSWatchers = [];
 	}
 
 	//Compress jsPile with UglifyJS
-	var compressedPile = jsPile;//UglifyJS.minify(jsPile, {fromString: true}).code;
+	var compressedPile = UglifyJS.minify(jsPile, {fromString: true}).code;
 
 	//Write compressed data to koala-package.js
 	fs.writeFileSync(path.join(publicRootPath, "koala-compiled.js"), compressedPile, "utf8");
