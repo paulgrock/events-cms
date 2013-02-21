@@ -9,10 +9,6 @@ legend {
 	font-weight: 200;
 }
 
-a, a:hover {
-	color: #ba0101;
-}
-
 h1, h2, h3 {
 	font-weight: 200;
 }
@@ -31,11 +27,6 @@ h3 {
 
 th {
 	white-space: nowrap;
-}
-
-.nav-pills .active a,
-.nav-pills .active a:hover {
-	background-color: #ba0101;
 }
 
 .no-margin {
