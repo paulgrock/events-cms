@@ -33,6 +33,10 @@ th {
 	white-space: nowrap;
 }
 
+table .btn {
+	white-space: nowrap;
+}
+
 .nav-pills .active a,
 .nav-pills .active a:hover {
 	background-color: #ba0101;
