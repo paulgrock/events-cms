@@ -11,6 +11,6 @@
     "jade": "*",
     "socket.io": "*",
     "uglify-js": "*",
-    "less": "*"
+    "stylus": "*"
   }
 }
