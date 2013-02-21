@@ -9,6 +9,11 @@ var fetchContent = function(options, payload, cb) {
 	options.port 		= 80;
 	options.path 		= '/content/v2' + options.path;
 	options.method 		= (options.method || 'GET').toUpperCase();
+	options.headers 	= {
+		"Content-Type": "application/json, text/javascript",
+		"Content-Length": payload.length,
+		"Accept": "application/json, text/javascript"
+	};
 
 	var req = http.request(options, function(res) {
 		var chunks = "";
@@ -30,7 +35,6 @@ var fetchContent = function(options, payload, cb) {
 	req.write(payload);
 	req.end();
 
-	//console.log(options);
 };
 
 
@@ -45,8 +49,7 @@ var formPath = function(req) {
 var passThrough = function(req, res) {
 	var options = {
 		path: formPath(req),
-		method: req.route.method,
-		headers: req.headers
+		method: req.route.method
 	};
 
 	//Express parses body to json, convert back to string
