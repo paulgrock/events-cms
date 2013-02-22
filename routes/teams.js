@@ -3,10 +3,6 @@ exports.list = function(req, res){
   	{
       id: "teams",
   		title: "Team Listing",
-  		breadcrumbs: [
-  			{title: "Home", url: "/"},
-  			{title: "Teams"}
-  		],
       filter: req.query.group,
       type: "Team",
       info: "Information relating to specific Teams."
@@ -20,11 +16,8 @@ exports.edit = function(req, res){
     {
       id: "team_edit",
       title: "Edit Team",
-      breadcrumbs: [
-        {title: "Home",url: "/"},
-        {title: "Teams",url: "/teams"},
-        {title: "Edit Team"}
-      ],
+      back: "/teams",
+      type: "Team",
       team_id: team_id
     });
 };
@@ -34,10 +27,6 @@ exports.new = function(req, res) {
     {
       id: "team_new",
       title: "Create Team",
-      breadcrumbs: [
-        {title: "Home",url: "/"},
-        {title: "Teams",url: "/team"},
-        {title: "Create Team"}
-      ]
+      back: "/teams"
     });
 }

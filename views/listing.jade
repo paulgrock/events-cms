@@ -1,14 +1,13 @@
 extends layouts/basic
 
 block above_content
-	.add_item_prompt
-		.container
-			h1 #{type}s
-			p.lead #{info}
+	include includes/splash
 	.page_menu
 		.container
 			strong Options:
-			a.btn(href='/#{id}/new') Create #{type}
+			a.btn(href='/#{id}/new')
+				i.icon-pencil
+				|  Create #{type}
 
 block content
 	#groupPills

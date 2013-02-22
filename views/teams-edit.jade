@@ -1,19 +1,7 @@
-extends layouts/basic
+extends layouts/edit
 
-block content
-	h2 #{title}
-	p.lead Changes made to this team will be instantly saved.
-
-	.form-horizontal
-		#team_form_target
-
-	.form-horizontal
-		.form-actions
-			button.btn.btn-danger#delete Delete
-			&nbsp;
-			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
-			a.btn(href=href) Go Back
-		
+append form
+	#team_form_target
 
 block append scripts
 	script
@@ -40,7 +28,7 @@ block append scripts
 
 						Team.destroy({
 							success: function(model, response) {
-								location.replace("#{href}");
+								location.replace("#{back}");
 							},
 							error: function(model, xhr) {
 								window.scrollTo(0,0);

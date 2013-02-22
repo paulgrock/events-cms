@@ -3,10 +3,6 @@ exports.list = function(req, res){
   	{
       id: "matchups",
   		title: "Matchup Listing",
-  		breadcrumbs: [
-  			{title: "Home", url: "/"},
-  			{title: "Matchups"}
-  		],
       filter: req.query.group,
       type: "Matchup",
       info: "Information relating to specific Matchups, including Games."
@@ -20,11 +16,8 @@ exports.edit = function(req, res){
     {
       id: "matchup_edit",
       title: "Edit Matchup",
-      breadcrumbs: [
-        {title: "Home",url: "/"},
-        {title: "Matchups",url: "/matchups"},
-        {title: "Edit Matchup"}
-      ],
+      back: "/matchups",
+      type: "Matchup",
       matchup_id: matchup_id
     });
 };
@@ -34,10 +27,6 @@ exports.new = function(req, res) {
     {
       id: "matchup_new",
       title: "Create Matchup",
-      breadcrumbs: [
-        {title: "Home",url: "/"},
-        {title: "Matchups",url: "/matchups"},
-        {title: "Create Matchup"}
-      ]
+      back: "/matchups"
     });
 }
