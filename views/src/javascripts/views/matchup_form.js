@@ -41,7 +41,7 @@ Koala.views.add('matchup_form', Backbone.View.extend({
 		$('.teamA', this.el).append(this.teamA_typeahead.el);
 		$('.teamB', this.el).append(this.teamB_typeahead.el);
 		this.fillTeams();
-		$('.gameTable', this.el).append(this.game_table.render().el);
+		$('.gameTable', this.el).append(this.game_table.el);
 
 		return this;
 	},

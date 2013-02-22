@@ -15,7 +15,7 @@ Koala.models.add('event', Backbone.Model.extend({
 		this.matchup = Koala.models.new('matchup', this.get('matchup'));
 
 		this.on("change:matchup", function() {
-			this.matchup.set(this.get('matchup'), {silent:true});
+			this.matchup.set(this.get('matchup'));
 		});
 
 		this.listenTo(this.matchup, "change", function() {
