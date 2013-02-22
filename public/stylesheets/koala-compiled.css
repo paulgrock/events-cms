@@ -885,6 +885,7 @@ h3{font-size:18px}
 th{white-space:nowrap}
 .no-margin{margin:0}
 .table td{vertical-align:middle}
+.table .btn{white-space:nowrap}
 .navbar{margin-bottom:0}
 .add_item_prompt{padding:30px 0 30px 0;color:#fff;margin:-19px 0 30px 0;text-shadow:0 1px 3px rgba(0,0,0,0.4),0 0 30px rgba(0,0,0,0.075);background:#a90329;background:-moz-linear-gradient(45deg,#a90329 0%,#b7031e 44%,#6d0019 100%);background:-webkit-gradient(linear,left bottom,right top,color-stop(0%,#a90329),color-stop(44%,#b7031e),color-stop(100%,#6d0019));background:-webkit-linear-gradient(45deg,#a90329 0%,#b7031e 44%,#6d0019 100%);background:-o-linear-gradient(45deg,#a90329 0%,#b7031e 44%,#6d0019 100%);background:-ms-linear-gradient(45deg,#a90329 0%,#b7031e 44%,#6d0019 100%);background:linear-gradient(45deg,#a90329 0%,#b7031e 44%,#6d0019 100%);}
 .add_item_prompt + .page_menu{margin:-30px 0 30px 0}
