@@ -7,15 +7,10 @@ Koala.views.add('game_table', Backbone.View.extend({
 	template: Koala.templates.get('game_table'),
 
 	initialize: function(options) {
+		this.$el.html(this.template());
 		this.listenTo(this.collection, 'add', this.addOne);
 		this.listenTo(this.collection, 'reset', this.addAll);
 		this.matchup = options.matchup;
-	},
-
-	render: function() {
-		this.$el.html(this.template());
-		this.addAll();
-		return this;
 	},
 
 	addOne: function(model) {

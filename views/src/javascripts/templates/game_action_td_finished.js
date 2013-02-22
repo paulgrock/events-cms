@@ -1,1 +1,1 @@
-Koala.templates.add('game_action_td_finished', '-');
+Koala.templates.add('game_action_td_finished', '<i class="icon-ban-circle"></i>');

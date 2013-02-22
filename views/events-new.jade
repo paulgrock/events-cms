@@ -1,22 +1,9 @@
-extends layouts/basic
+extends layouts/new
 
-block content
+append form
+	#event_form_target
 
-	h2 #{title}
-
-	.form-horizontal
-		#event_form_target
-		#matchup_form_target
-
-	.form-horizontal
-		.form-actions
-			button.btn.btn-success#save_event #{title}
-			&nbsp;
-			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
-			a.btn#cancel(href=href) Cancel
-
-
-block append scripts
+append scripts
 	script
 		$(function() {
 			var Event = Koala.models.new('event');
@@ -26,33 +13,33 @@ block append scripts
 			$('#event_form_target').replaceWith(event_form.el);
 			event_form.render();
 
-			var Matchup = Koala.models.new('matchup');
-			var matchup_form = Koala.views.new('matchup_form', {
-				model: Matchup
+			var create_delete_button = Koala.views.new('create_delete_button', {
+				model: Event,
+				type: "Event",
+				back: "#{back}"
 			});
-			$('#matchup_form_target').replaceWith(matchup_form.el);
-			matchup_form.render();
+			$('#create').replaceWith(create_delete_button.render().el);
 
-			$('#save_event').click(function() {
-				var self = this;
+			//- $('#save').click(function() {
+			//- 	var self = this;
 
-				$(self).button('loading');
+			//- 	$(self).button('loading');
 
-				Event.set('matchup', _.clone(Matchup.attributes));
+			//- 	Event.set('matchup', _.clone(Matchup.attributes));
 
-				Event.save(null, {
-					success: function(model, response) {
-						var id = response && response.id;
-						location.replace("#{href}"+"/"+id);
-					},
-					error: function(model, xhr) {
-						window.scrollTo(0,0);
-					},
-					complete: function() {
-						$(self).button('reset');
-					}
-				});
-			});
+			//- 	Event.save(null, {
+			//- 		success: function(model, response) {
+			//- 			var id = response && response.id;
+			//- 			location.replace("#{back}"+"/"+id);
+			//- 		},
+			//- 		error: function(model, xhr) {
+			//- 			window.scrollTo(0,0);
+			//- 		},
+			//- 		complete: function() {
+			//- 			$(self).button('reset');
+			//- 		}
+			//- 	});
+			//- });
 
 			
 		});

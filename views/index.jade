@@ -1,10 +1,8 @@
 extends layouts/basic
 
 block above_content
-	.add_item_prompt
-		.container
-			h1 #{type}s
-			p.lead #{info}
+
+	include includes/splash
 
 block content
 	table.table.table-striped

@@ -1,0 +1,21 @@
+extends basic
+
+append above_content
+	.page_menu
+		.container
+			a.btn(href='#{back}')
+				i.icon-arrow-left
+				|  Go Back
+
+block content
+	h2 #{title}
+	p.lead Changes made to this #{type} will be instantly saved.
+
+	.form-horizontal
+		block form
+
+	.form-horizontal
+		.form-actions
+			#delete
+			&nbsp;
+			a.btn#cancel(href="#{back}") Go Back

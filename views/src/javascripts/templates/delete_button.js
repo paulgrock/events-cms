@@ -1,0 +1,1 @@
+Koala.templates.add('delete_button', '<button data-loading-text="Deleting..." class="btn btn-danger delete"><i class="icon-trash icon-white"></i> Delete <%= type %></button>');

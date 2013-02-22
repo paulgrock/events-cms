@@ -41,6 +41,10 @@ Koala.views.add('event_form', Backbone.View.extend({
 			type: 'End'
 		});
 
+		//Matchup form
+		var matchup_form = Koala.views.new('matchup_form', {
+			model: this.model.matchup
+		});
 
 		//Bind to view
 		this.collections = {
@@ -52,7 +56,8 @@ Koala.views.add('event_form', Backbone.View.extend({
 			stream_select: stream_select,
 			group_select: group_select,
 			startDate_form: startDate_form,
-			endDate_form: endDate_form
+			endDate_form: endDate_form,
+			matchup_form: matchup_form
 		};
 
 		//Listeners
@@ -76,6 +81,7 @@ Koala.views.add('event_form', Backbone.View.extend({
 		$('#event-group-wrapper').append(this.views.group_select.render().el);
 		$('#startDate').replaceWith(this.views.startDate_form.render().el);
 		$('#endDate').replaceWith(this.views.endDate_form.render().el);
+		$('#matchup').replaceWith(this.views.matchup_form.render().el);
 
 		//Augment endDate
 		var self = this;

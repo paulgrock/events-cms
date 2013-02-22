@@ -37,10 +37,10 @@ th
 .navbar 
 	margin-bottom 0
 
-.add_item_prompt 
+.splash
 	padding 30px 0 30px 0
 	color #FFF
-	margin -19px 0 30px 0
+	margin-bottom 20px
 	text-shadow 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075)
 
 	background #a90329 /* Old browsers */
@@ -52,16 +52,24 @@ th
 	background -ms-linear-gradient(45deg,  #a90329 0%,#b7031e 44%,#6d0019 100%) /* IE10+ */
 	background linear-gradient(45deg,  #a90329 0%,#b7031e 44%,#6d0019 100%) /* W3C */
 
-.add_item_prompt + .page_menu 
-	margin -30px 0 30px 0
+.navbar + .splash
+	margin-top -20px
 
 .page_menu 
 	height 50px
-	background-color#EEE
+	background-color #EEE
 	line-height 50px
+	margin-bottom 20px
 
-.page_menu .btn 
+.splash + .page_menu,
+.navbar + .page_menu
+	margin-top -20px
+
+.page_menu strong + .btn
 	margin-left 10px
+
+.page_menu .btn
+	margin-right 10px
 
 .timeWarning 
 	margin 20px 0 20px 0

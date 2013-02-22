@@ -1,0 +1,17 @@
+extends layouts/list
+
+prepend content
+	#groupPills
+
+append scripts
+	include includes/listing-table
+	script
+		$(function() {
+			var Groups = Koala.collections.new('groups');
+			var group_pills = Koala.views.new('group_pills', {
+				collection: Groups
+			});
+			Groups.fetch();
+
+			$('#groupPills').replaceWith(group_pills.el);
+		});
