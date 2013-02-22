@@ -1,0 +1,16 @@
+extends basic
+
+block above_content
+	include ../includes/splash
+	.page_menu
+		.container
+			strong Options:
+			a.btn(href='/#{id}/new')
+				i.icon-pencil
+				|  Create #{type}
+
+block content
+	#listingTable
+
+
+
