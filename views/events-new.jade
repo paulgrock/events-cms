@@ -2,7 +2,6 @@ extends layouts/new
 
 append form
 	#event_form_target
-	#matchup_form_target
 
 append scripts
 	script
@@ -14,33 +13,33 @@ append scripts
 			$('#event_form_target').replaceWith(event_form.el);
 			event_form.render();
 
-			var Matchup = Koala.models.new('matchup');
-			var matchup_form = Koala.views.new('matchup_form', {
-				model: Matchup
+			var create_delete_button = Koala.views.new('create_delete_button', {
+				model: Event,
+				type: "Event",
+				back: "#{back}"
 			});
-			$('#matchup_form_target').replaceWith(matchup_form.el);
-			matchup_form.render();
+			$('#create').replaceWith(create_delete_button.render().el);
 
-			$('#save').click(function() {
-				var self = this;
+			//- $('#save').click(function() {
+			//- 	var self = this;
 
-				$(self).button('loading');
+			//- 	$(self).button('loading');
 
-				Event.set('matchup', _.clone(Matchup.attributes));
+			//- 	Event.set('matchup', _.clone(Matchup.attributes));
 
-				Event.save(null, {
-					success: function(model, response) {
-						var id = response && response.id;
-						location.replace("#{back}"+"/"+id);
-					},
-					error: function(model, xhr) {
-						window.scrollTo(0,0);
-					},
-					complete: function() {
-						$(self).button('reset');
-					}
-				});
-			});
+			//- 	Event.save(null, {
+			//- 		success: function(model, response) {
+			//- 			var id = response && response.id;
+			//- 			location.replace("#{back}"+"/"+id);
+			//- 		},
+			//- 		error: function(model, xhr) {
+			//- 			window.scrollTo(0,0);
+			//- 		},
+			//- 		complete: function() {
+			//- 			$(self).button('reset');
+			//- 		}
+			//- 	});
+			//- });
 
 			
 		});

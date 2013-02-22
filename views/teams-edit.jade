@@ -14,30 +14,17 @@ block append scripts
 				model: Team
 			});
 
+			var create_delete_button = Koala.views.new('create_delete_button', {
+				model: Team,
+				type: "Team",
+				back: "#{back}"
+			});
+			$('#delete').replaceWith(create_delete_button.render().el);
+
 			Team.fetch({
-
 				success: function(model, data) {
-
 					$('#team_form_target').replaceWith(team_form.el);
 					team_form.render();
-
-
-					$('#delete').click(function() {
-						var self = this;
-						$(this).button('loading');
-
-						Team.destroy({
-							success: function(model, response) {
-								location.replace("#{back}");
-							},
-							error: function(model, xhr) {
-								window.scrollTo(0,0);
-							},
-							complete: function() {
-								$(self).button('reset');
-							}
-						});
-					});
 				}
 			});
 

@@ -2,7 +2,6 @@ extends layouts/edit
 
 append form
 	#event_form_target
-	#matchup_form_target
 
 append scripts
 	script
@@ -16,41 +15,30 @@ append scripts
 				model: Event
 			});
 
+			var create_delete_button = Koala.views.new('create_delete_button', {
+				model: Event,
+				type: "Event",
+				back: "#{back}"
+			});
+			$('#delete').replaceWith(create_delete_button.render().el);
+
 			Event.fetch({
 
 				success: function(model, data) {
-
 					$('#event_form_target').replaceWith(event_form.el);
 					event_form.render();
 
-					if(data && data.matchup && data.matchup.id) {
-						var Matchup = Koala.models.new('matchup', data.matchup);
+					//- if(data && data.matchup && data.matchup.id) {
+					//- 	var Matchup = Koala.models.new('matchup', data.matchup);
 
-						var matchup_form = Koala.views.new('matchup_form', {
-							model: Matchup
-						});
+					//- 	var matchup_form = Koala.views.new('matchup_form', {
+					//- 		model: Matchup
+					//- 	});
 
-						$('#matchup_form_target').replaceWith(matchup_form.el);
-						matchup_form.render();
+					//- 	$('#matchup_form_target').replaceWith(matchup_form.el);
+					//- 	matchup_form.render();
 
-					}
-
-					$('#delete').click(function() {
-						var self = this;
-						$(this).button('deleting');
-
-						Event.destroy({
-							success: function(model, response) {
-								location.replace("#{back}");
-							},
-							error: function(model, xhr) {
-								window.scrollTo(0,0);
-							},
-							complete: function() {
-								$(self).button('reset');
-							}
-						});
-					});
+					//- }
 				}
 			});
 

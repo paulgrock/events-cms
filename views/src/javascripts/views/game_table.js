@@ -8,7 +8,7 @@ Koala.views.add('game_table', Backbone.View.extend({
 
 	initialize: function(options) {
 		this.listenTo(this.collection, 'add', this.addOne);
-		this.listenTo(this.collection, 'reset', this.addAll);
+		this.listenTo(this.collection, 'reset', this.render);
 		this.matchup = options.matchup;
 	},
 

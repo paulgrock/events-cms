@@ -15,23 +15,11 @@ append scripts
 			$('#matchup_form_target').replaceWith(matchup_form.el);
 			matchup_form.render();
 
-			$('#save').click(function() {
-				var self = this;
-
-				$(self).button('loading');
-
-				Matchup.save(null, {
-					success: function(model, response) {
-						var id = response && response.id;
-						location.replace("#{back}"+"/"+id);
-					},
-					error: function(model, xhr) {
-						window.scrollTo(0,0);
-					},
-					complete: function() {
-						$(self).button('reset');
-					}
-				});
+			var create_delete_button = Koala.views.new('create_delete_button', {
+				model: Matchup,
+				type: "Matchup",
+				back: "#{back}"
 			});
+			$('#create').replaceWith(create_delete_button.render().el);
 
 		});

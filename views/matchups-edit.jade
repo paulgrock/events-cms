@@ -14,30 +14,18 @@ append scripts
 				model: Matchup
 			});
 
+			var create_delete_button = Koala.views.new('create_delete_button', {
+				model: Matchup,
+				type: "Matchup",
+				back: "#{back}"
+			});
+			$('#delete').replaceWith(create_delete_button.render().el);
+
 			Matchup.fetch({
 
 				success: function(model, data) {
-
 					$('#matchup_form_target').replaceWith(matchup_form.el);
 					matchup_form.render();
-
-
-					$('#delete').click(function() {
-						var self = this;
-						$(this).button('loading');
-
-						Matchup.destroy({
-							success: function(model, response) {
-								location.replace("#{back}");
-							},
-							error: function(model, xhr) {
-								window.scrollTo(0,0);
-							},
-							complete: function() {
-								$(self).button('reset');
-							}
-						});
-					});
 				}
 			});
 
