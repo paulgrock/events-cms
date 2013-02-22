@@ -1,0 +1,1 @@
+Koala.templates.add('edit_delete_button', '<a href="<%= href %>" class="btn"><i class="icon-edit"></i> Edit</a><button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button><ul role="menu" class="dropdown-menu"><li><a class="delete"><i class="icon-trash"></i> Delete</a></li></ul>');

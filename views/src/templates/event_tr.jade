@@ -18,11 +18,4 @@ td.
 td <%= franchise %>
 td <%= title %>
 td <%= starts_at %>
-td
-	.btn-group
-		a.btn(href!='/events/<%= id %>') Edit
-		button.btn.dropdown-toggle(data-toggle='dropdown')
-			span.caret
-		ul.dropdown-menu(role='menu')
-			li
-				a(class='delete') Delete
+td.actionButton

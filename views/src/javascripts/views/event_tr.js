@@ -4,19 +4,6 @@ Koala.views.add('event_tr', Backbone.View.extend({
 
 	template: Koala.templates.get('event_tr'),
 
-	events: {
-		"click .delete" : function() {
-			Koala.views.new('confirm_delete_modal', {
-				model: this.model,
-				modal: {
-					action: "Confirm Event Deletion.",
-					message: "Are you sure you want to permanently delete this event?",
-					snippet: this.model.attributes.title,
-				}
-			});
-		}
-	},
-
 	initialize: function() {
 		this.listenTo(this.model, "change", this.render);
 		this.listenTo(this.model, "destroy", this.destroy);
@@ -28,10 +15,18 @@ Koala.views.add('event_tr', Backbone.View.extend({
 		this.data.starts_at = moment(this.model.attributes.starts_at).calendar();
 		this.data.franchise = this.model.attributes.groups[0] && this.model.attributes.groups[0].name;
 		this.data.status = this.status(this.model.attributes.starts_at, this.model.attributes.ends_at);
+
+		//Action Button
+		this.actionButton = Koala.views.new('edit_delete_button', {
+			type: "Event",
+			href: "/events/" + this.model.get('id'),
+			model: this.model
+		});
 	},
 
 	render: function() {
 		this.$el.html(this.template(this.data));
+		$('.actionButton', this.el).append(this.actionButton.render().el);
 		return this;
 	},
 
