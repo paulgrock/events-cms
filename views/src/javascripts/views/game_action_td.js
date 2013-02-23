@@ -4,11 +4,11 @@ Koala.views.add('game_action_td', Backbone.View.extend({
 
 	events: {
 		"click .teamA_select" : function() {
-			this.model.set('winner', this.matchup.teams[0]);
+			this.model.set('winner', this.matchup.get("teams")[0]);
 			this.end();
 		},
 		"click .teamB_select" : function() {
-			this.model.set("winner", this.matchup.teams[1]);
+			this.model.set("winner", this.matchup.get("teams")[1]);
 			this.end();
 		},
 		"click .start_select" : "start"
@@ -16,12 +16,13 @@ Koala.views.add('game_action_td', Backbone.View.extend({
 
 	initialize: function(options) {
 		this.matchup = options.matchup;
+		this.listenTo(this.matchup, "change:teams", this.render);
 	},
 
 	render: function() {
 		var data = $.extend(true, {}, this.model.attributes);
-		data.teamA = this.matchup.teams && this.matchup.teams[0];
-		data.teamB = this.matchup.teams && this.matchup.teams[1];
+		data.teamA = this.matchup.get("teams") && this.matchup.get("teams")[0];
+		data.teamB = this.matchup.get("teams") && this.matchup.get("teams")[1];
 
 		this.$el.html(this.getTemplate()(data))
 
@@ -31,7 +32,7 @@ Koala.views.add('game_action_td', Backbone.View.extend({
 	},
 
 	getTemplate: function() {
-		switch(this.model.attributes.status) {
+		switch(this.model.get('status')) {
 			case "underway":
 				return Koala.templates.get('game_action_td_underway');
 
