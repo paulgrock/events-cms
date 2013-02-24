@@ -898,3 +898,6 @@ th{white-space:nowrap}
 #teamWarning{margin:0}
 #bestOf{margin:0}
 .team_typeahead img{margin-right:10px;width:40px;max-height:40px}
+.team_li .thumbnail{overflow:hidden}
+.team_li img{width:77px;height:77px;margin-right:10px}
+.team_li h4{font-weight:200;font-size:16px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
