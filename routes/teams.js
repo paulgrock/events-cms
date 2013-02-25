@@ -5,7 +5,7 @@ exports.list = function(req, res){
   		title: "Team Listing",
       filter: req.query.group,
       type: "Team",
-      info: "Information relating to specific Teams."
+      info: "Manage information relating to specific Teams."
   	});
 };
 

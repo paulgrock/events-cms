@@ -5,7 +5,7 @@ exports.list = function(req, res){
   		title: "Event Listing",
       filter: req.query.group,
       type: "Event",
-      info: "Information relating to specific Events, including Matchups and Games."
+      info: "Manage information relating to specific Events, including Matchups and Games."
   	});
 };
 
