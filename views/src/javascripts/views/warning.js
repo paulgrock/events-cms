@@ -1,5 +1,5 @@
 Koala.views.add('warning', Backbone.View.extend({
-	className: 'alert',
+	className: 'alert alert-info',
 
 	template: Koala.templates.get('warning'),
 
