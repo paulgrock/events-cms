@@ -1,0 +1,1 @@
+Koala.templates.add('game_table', '<colgroup span="5"></colgroup><colgroup><col width="1"/></colgroup><thead><tr><th>#</th><th>Status</th><th>Started</th><th>Ended</th><th>Winner</th><th>Action</th></tr></thead><tbody></tbody>');

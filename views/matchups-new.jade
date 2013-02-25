@@ -1,21 +1,9 @@
-extends layouts/basic
+extends layouts/new
 
-block content
-	h2 #{title}
+append form
+	#matchup_form_target
 
-	.form-horizontal
-		#matchup_form_target
-
-	.form-horizontal
-		.form-actions
-			button.btn.btn-success#save_matchup #{title}
-			&nbsp;
-			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
-			a.btn#cancel(href=href) Cancel
-		
-
-block append scripts
-	script(src='/javascripts/vendor/moment/moment.min.js')
+append scripts
 	script
 		$(function() {
 			var Matchup = Koala.models.new('matchup');
@@ -27,23 +15,11 @@ block append scripts
 			$('#matchup_form_target').replaceWith(matchup_form.el);
 			matchup_form.render();
 
-			$('#save_matchup').click(function() {
-				var self = this;
-
-				$(self).button('loading');
-
-				Matchup.save(null, {
-					success: function(model, response) {
-						var id = response && response.id;
-						location.replace("#{href}"+"/"+id);
-					},
-					error: function(model, xhr) {
-						window.scrollTo(0,0);
-					},
-					complete: function() {
-						$(self).button('reset');
-					}
-				});
+			var create_delete_button = Koala.views.new('create_delete_button', {
+				model: Matchup,
+				type: "Matchup",
+				back: "#{back}"
 			});
+			$('#create').replaceWith(create_delete_button.render().el);
 
 		});

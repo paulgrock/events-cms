@@ -1,1 +1,0 @@
-Koala.templates.add('game_action_td_finished', '-');

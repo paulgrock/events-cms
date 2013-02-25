@@ -1,0 +1,7 @@
+.thumbnail
+	|<% if(!image_url) { %>
+	img.pull-left(data-src="holder.js/77x77/auto", alt="")
+	|<% } else { %>
+	img.pull-left(src!="<%= image_url %>", alt!="<%= name %>")
+	|<% } %>
+	h4 <%= name %>

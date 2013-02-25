@@ -10,6 +10,7 @@
     "forever": "~0.10.0",
     "jade": "*",
     "socket.io": "*",
-    "uglify-js": "*"
+    "uglify-js": "*",
+    "stylus": "*"
   }
 }

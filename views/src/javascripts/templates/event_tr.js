@@ -1,0 +1,1 @@
+Koala.templates.add('event_tr', '<td class="status"></td><td><%= franchise %></td><td><%= title %></td><td><%= starts_at %></td><td class="actionButton"></td>');

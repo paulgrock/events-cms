@@ -1,14 +1,11 @@
-
-/*
- * GET home page.
- */
+var activity_logger = require("../lib/activity_logger");
 
 exports.index = function(req, res){
   res.render('index', {
-  	id: 'home',
-  	title: 'Home',
-	breadcrumbs: [
-		{title: "Home"}
-	]
+  	id: 'activity',
+  	title: 'Activity List',
+	type: "Log",
+	info: "Showing all recent activity.",
+	logs: activity_logger.retrieve()
   });
 };

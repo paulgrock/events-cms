@@ -8,7 +8,8 @@ var express = require('express')
     , path = require('path')
     , fs = require('fs')
     , util = require('util')
-    , build = require('./build').build
+    , builder = require('./lib/builder')
+    , activity_logger = require('./lib/activity_logger')
     , index = require('./routes')
     , events = require('./routes/events')
     , matchups = require('./routes/matchups')
@@ -85,21 +86,6 @@ app.configure('development', function(){
     app.use(express.errorHandler());
 });
 
-//App Locals
-function Page(id, title, url, filters) {
-    this.id = id;
-    this.title = title;
-    this.url = url;
-}
-
-app.locals.pages = {
-    home:     new Page('home', 'Home', '/'),
-    events:   new Page('events', 'Events', '/events'),
-    matchups: new Page('matchups', 'Matchups', '/matchups'),
-    teams:    new Page('teams', 'Teams', '/teams'),
-    videos:   new Page('videos', 'Videos', '/videos')
-};
-
 // Basic Webserver
 app.get('/', index.index);
 app.get('/events', events.list);
@@ -112,7 +98,7 @@ app.get('/teams', teams.list);
 app.get('/teams/new', teams.new);
 app.get('/teams/:team_id', teams.edit);
 app.get('/videos', videos.list);
-app.get('/videos/:video_id', videos.edit);
+// app.get('/videos/:video_id', videos.edit);
 
 // Api Passthrough
 app.get('/api/:type', api.passThrough);
@@ -121,6 +107,23 @@ app.put('/api/:type/:id', api.action);
 app.post('/api/:type', api.action);
 app.delete('/api/:type/:id', api.action);
 
+
+//App Locals
+
+app.locals.pages = (function() {
+    function Page(id, title, url, filters) {
+        this.id = id;
+        this.title = title;
+        this.url = url;
+    }
+    return {
+        activity: new Page('activity', 'Activity', '/'),
+        events:   new Page('events', 'Events', '/events'),
+        matchups: new Page('matchups', 'Matchups', '/matchups'),
+        teams:    new Page('teams', 'Teams', '/teams'),
+        videos:   new Page('videos', 'Videos', '/videos')
+    };
+})();
 
 
 http.createServer(app).listen(app.get('port'), function(){

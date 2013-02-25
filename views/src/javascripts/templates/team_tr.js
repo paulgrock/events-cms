@@ -1,0 +1,1 @@
+Koala.templates.add('team_tr', '<td><%= name %></td><td class="actionButton"></td>');

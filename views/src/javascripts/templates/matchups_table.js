@@ -1,0 +1,1 @@
+Koala.templates.add('matchups_table', '<colgroup span="5"></colgroup><colgroup><col width="1"/></colgroup><thead><th>Status</th><th>Team A</th><th>Team B</th><th>Best Of</th><th>Played</th><th>Action</th></thead>');

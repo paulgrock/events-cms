@@ -1,9 +1,0 @@
-if breadcrumbs.length > 2
-	ul.breadcrumb
-		for page in breadcrumbs
-			li
-				if page.url
-					a(href=page.url)= page.title
-					span.divider /
-				else
-					| #{page.title}

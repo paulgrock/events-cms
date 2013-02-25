@@ -1,1 +1,0 @@
-Koala.templates.add('game_tr', '<td><%= number %></td><td><span class=\'label <%   switch(status) {   case \'underway\':    %>label-info<%    break;       case \'ready\':    %>label-warning<%    break;   }  %>\'><%= status.toUpperCase() %></span></td><td><%= starts_at %></td><td><%= ends_at %></td><td><%= winner %></td><td class="action"></td>');

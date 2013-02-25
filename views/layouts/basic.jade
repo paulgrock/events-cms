@@ -3,9 +3,7 @@ html
 	head
 		block head
 			title= title
-			link(rel='stylesheet', href='/stylesheets/vendor/bootstrap/bootstrap.min.css')
-			link(rel='stylesheet', href='/stylesheets/vendor/bootstrap/bootstrap-responsive.min.css')
-			link(rel='stylesheet', href='/stylesheets/style.css')
+			link(rel='stylesheet', href='/stylesheets/koala-compiled.css')
 
 	body
 
@@ -14,8 +12,6 @@ html
 		block above_content
 
 		.container
-
-			include ../includes/breadcrumbs
 
 			block content
 
@@ -27,8 +23,5 @@ html
 
 
 		block scripts
-			script(src='/javascripts/vendor/jquery/jquery-1.9.0.min.js')
-			script(src='/javascripts/vendor/bootstrap/bootstrap.js')
-			script(src='/javascripts/vendor/underscore/underscore-min.js')
-			script(src='/javascripts/vendor/backbone/backbone-min.js')
+			script(src='/javascripts/vendor-compiled.js')
 			script(src='/javascripts/koala-compiled.js')

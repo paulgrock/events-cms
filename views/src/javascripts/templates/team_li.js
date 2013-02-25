@@ -1,0 +1,1 @@
+Koala.templates.add('team_li', '<div class="thumbnail"><% if(!image_url) { %><img data-src="holder.js/77x77/auto" alt="" class="pull-left"/><% } else { %><img src="<%= image_url %>" alt="<%= name %>" class="pull-left"/><% } %><h4><%= name %></h4></div>');

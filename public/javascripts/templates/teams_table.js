@@ -1,1 +1,0 @@
-Koala.templates.add('teams_table', '<colgroup><col/><col width="1"/></colgroup><thead><th>Name</th><th>Action</th></thead>');

@@ -1,0 +1,20 @@
+extends basic
+
+append above_content
+	.page_menu
+		.container
+			a.btn(href='#{back}')
+				i.icon-arrow-left
+				|  Go Back
+
+block content
+	h2 #{title}
+
+	.form-horizontal
+		block form
+
+	.form-horizontal
+		.form-actions
+			#create
+			&nbsp;
+			a.btn#cancel(href="#{back}") Cancel

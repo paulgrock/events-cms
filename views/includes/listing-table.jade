@@ -1,0 +1,6 @@
+script
+	$(function() {
+		var table = Koala.views.new('#{id}_table');
+		$('#listingTable').replaceWith(table.el);
+		table.render();
+	});
