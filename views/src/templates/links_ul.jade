@@ -1,0 +1,15 @@
+|<% if(prev) {%>
+li.previous
+	a(href!="<%= prev %>") &larr; Previous
+|<% }else{ %>
+li.previous.disabled
+	a &larr; Previous
+|<% } %>
+
+|<% if(next) {%>
+li.next
+	a(href!="<%= next %>") Next &rarr;
+|<% }else{ %>
+li.next.disabled
+	a Next &rarr;
+|<% } %>

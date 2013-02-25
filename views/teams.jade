@@ -1,0 +1,12 @@
+extends layouts/list
+
+block content
+	#teams_ul
+
+append scripts
+	script
+		$(function() {
+			var teams_ul = Koala.views.new('teams_ul');
+			$('#teams_ul').replaceWith(teams_ul.el);
+			teams_ul.render();
+		});

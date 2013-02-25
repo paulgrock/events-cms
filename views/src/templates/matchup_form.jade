@@ -1,0 +1,36 @@
+legend Matchup
+
+.controls
+	.alert.alert-warning
+		button.close(type='button', data-dismiss='alert') &times;
+		strong Please Note!
+		|  Teams entered into the matchup below must have first been added through the 'Teams' section!
+
+
+.control-group
+	label.control-label Team A Name:
+	.controls.teamA
+
+.control-group
+	label.control-label Team B Name:
+	.controls.teamB
+
+.control-group
+	label.control-label Best Of:
+	.controls
+		ul.nav.nav-pills#bestOf
+			|<% for(var i = 1; i <= 13; i+=2) { %>
+			|<% if(i === best_of) { %>
+			li.active
+				a <%= i %>
+			|<% } else { %>
+			li
+				a <%= i %>
+			|<% } %>
+			|<% } %>
+
+|<% if(games && games.length) { %>
+.control-group
+	label.control-label Games:
+	.controls.gameTable
+|<% } %>

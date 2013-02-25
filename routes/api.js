@@ -1,5 +1,6 @@
 var http = require('http');
 var querystring = require('querystring');
+var activity_logger = require('../lib/activity_logger');
 
 var fetchContent = function(options, payload, cb) {
 	var options = options || {};
@@ -8,6 +9,14 @@ var fetchContent = function(options, payload, cb) {
 	options.port 		= 80;
 	options.path 		= '/content/v2' + options.path;
 	options.method 		= (options.method || 'GET').toUpperCase();
+
+	if(options.method === "DELETE") {
+		options.headers = {
+			"Content-Type": "application/json, text/javascript",
+			"Content-Length": payload.length,
+			"Accept": "application/json, text/javascript"
+		};
+	}
 
 	var req = http.request(options, function(res) {
 		var chunks = "";
@@ -29,7 +38,6 @@ var fetchContent = function(options, payload, cb) {
 	req.write(payload);
 	req.end();
 
-	//console.log(options);
 };
 
 
@@ -59,6 +67,17 @@ var passThrough = function(req, res) {
 		res.set(headers);
 		res.status(status);
 		res.send(chunks);
+
+		//Log
+		if(options.method.toUpperCase() !== "GET") {
+			activity_logger.append({
+				ip: req.ip,
+				endPoint: req.path,
+				method: options.method.toUpperCase(),
+				status: status
+			});
+		}
+
 	});
 };
 

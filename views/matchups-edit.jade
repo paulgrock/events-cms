@@ -1,22 +1,9 @@
-extends layouts/basic
+extends layouts/edit
 
-block content
-	h2 #{title}
-	p.lead Changes made to this matchup will be instantly saved.
+append form
+	#matchup_form_target
 
-	.form-horizontal
-		#matchup_form_target
-
-	.form-horizontal
-		.form-actions
-			button.btn.btn-danger#delete Delete
-			&nbsp;
-			- var href = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length-2].url : '';
-			a.btn(href=href) Go Back
-		
-
-block append scripts
-	script(src='/javascripts/vendor/moment/moment.min.js')
+append scripts
 	script
 		$(function() {
 			var Matchup = Koala.models.new('matchup', {
@@ -27,30 +14,18 @@ block append scripts
 				model: Matchup
 			});
 
+			var create_delete_button = Koala.views.new('create_delete_button', {
+				model: Matchup,
+				type: "Matchup",
+				back: "#{back}"
+			});
+			$('#delete').replaceWith(create_delete_button.render().el);
+
 			Matchup.fetch({
 
 				success: function(model, data) {
-
 					$('#matchup_form_target').replaceWith(matchup_form.el);
 					matchup_form.render();
-
-
-					$('#delete').click(function() {
-						var self = this;
-						$(this).button('loading');
-
-						Matchup.destroy({
-							success: function(model, response) {
-								location.replace("#{href}");
-							},
-							error: function(model, xhr) {
-								window.scrollTo(0,0);
-							},
-							complete: function() {
-								$(self).button('reset');
-							}
-						});
-					});
 				}
 			});
 
