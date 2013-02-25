@@ -2,7 +2,7 @@ Koala.views.add('team_image', Backbone.View.extend({
 
 	tagName: "img",
 
-	className: "img-polaroid",
+	className: "team_image img-polaroid",
 
 	attributes: {
 		width: "40px",

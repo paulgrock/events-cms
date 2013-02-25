@@ -29,9 +29,12 @@ Koala.views.add('team_input', Backbone.View.extend({
 		});
 
 		//Fill with TBA if empty
-		if(this.model.get('name') == "") {
-			this.$el.val("TBA");
-			this.setTeam();
+		if(this.model.isNew()) {
+			var TBA = this.findTeam("TBA");
+			if(TBA) {
+				this.model.set(TBA, {silent:true});
+				this.render();
+			}
 		}
 	},
 

@@ -1,20 +1,4 @@
-td.
-	<span class='label <% 
-	switch(status) {
-		case 'Pending':
-			%>label-inverse<%
-			break;
-
-		case 'Underway':
-			%>label-important<%
-			break;
-
-		case 'Starting Soon':
-			%>label-warning<%
-			break;
-		}
-	%>'><%= status %></span>
-
+td.status
 td <%= franchise %>
 td <%= title %>
 td <%= starts_at %>

@@ -14,11 +14,17 @@ Koala.views.add('matchup_tr', Backbone.View.extend({
 			href: "/matchups/" + this.model.get('id'),
 			model: this.model
 		});
+
+		//Status span
+		this.status_span = Koala.views.new('status_span', {
+			model: this.model
+		});
 	},
 
 	render: function() {
 		this.$el.html(this.template(this.model.attributes));
 		$('.actionButton', this.el).append(this.actionButton.render().el);
+		$('.status', this.el).append(this.status_span.render().el);
 		return this;
 	},
 

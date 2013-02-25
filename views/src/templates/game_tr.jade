@@ -1,16 +1,5 @@
 td <%= number %>
-td.
-	<span class='label <% 
-			switch(status) {
-				case 'underway':
-					%>label-important<%
-					break;
-
-				case 'ready':
-					%>label-warning<%
-					break;
-				}
-			%>'><%= status.toUpperCase() %></span>
+td.status
 td <%= starts_at %>
 td <%= ends_at %>
 td <%= winner %>

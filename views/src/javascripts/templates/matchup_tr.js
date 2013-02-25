@@ -1,1 +1,1 @@
-Koala.templates.add('matchup_tr', '<td><span class="label label-success"><%= status %></span></td><td><%= teams[0] && teams[0].name || "TBA" %></td><td><%= teams[1] && teams[1].name || "TBA" %></td><td><%= best_of %></td><td><%= games.length %></td><td class="actionButton"></td>');
+Koala.templates.add('matchup_tr', '<td class="status"></td><td><%= teams[0] && teams[0].name || "TBA" %></td><td><%= teams[1] && teams[1].name || "TBA" %></td><td><%= best_of %></td><td><%= games.length %></td><td class="actionButton"></td>');

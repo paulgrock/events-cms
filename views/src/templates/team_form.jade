@@ -2,8 +2,9 @@ legend Team
 .control-group
 	label.control-label Team Name:
 	.controls
-		input.teamName_input(type="text", placeholder="Enter a team name...", value!="<%= name %>")
+		input.span3.teamName_input(type="text", placeholder="Enter a team name...", value!="<%= name %>")
 .control-group
 	label.control-label Team Logo:
 	.controls
-		input.teamLogo_input(type="text", placeholder="Enter an image URL...", value!="<%= image_url %>")
+		.team_image
+		input.span3.teamLogo_input(type="text", placeholder="Enter an image URL...", value!="<%= image_url %>")

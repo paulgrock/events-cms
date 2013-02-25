@@ -9,6 +9,11 @@ Koala.views.add('game_tr', Backbone.View.extend({
 			model: this.model,
 			matchup: options.matchup
 		});
+
+		this.status_span = Koala.views.new('status_span', {
+			model: this.model
+		});
+
 		this.listenTo(this.model, 'change', this.render);
 	},
 
@@ -20,7 +25,9 @@ Koala.views.add('game_tr', Backbone.View.extend({
 		data.winner = data.winner && data.winner.name || "-";
 
 		this.$el.html(this.template(data));
+
 		$('.action', this.el).replaceWith(this.action.render().el);
+		$('.status', this.el).append(this.status_span.render().el);
 
 		return this;
 	}
