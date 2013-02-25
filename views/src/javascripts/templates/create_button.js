@@ -1,1 +1,1 @@
-Koala.templates.add('create_button', '<button data-loading-text="Creating..." class="btn btn-success create"> Create <%= type %></button>');
+Koala.templates.add('create_button', '<button data-loading-text="Creating..." class="btn btn-success create"><i class="icon-ok icon-white"></i> Create <%= type %></button>');

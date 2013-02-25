@@ -1,1 +1,1 @@
-Koala.templates.add('event_tr', '<td><span class=\'label <% switch(status) { case \'Pending\':  %>label-inverse<%  break;   case \'Underway\':  %>label-important<%  break;   case \'Starting Soon\':  %>label-warning<%  break; }%>\'><%= status %></span></td><td><%= franchise %></td><td><%= title %></td><td><%= starts_at %></td><td class="actionButton"></td>');
+Koala.templates.add('event_tr', '<td class="status"></td><td><%= franchise %></td><td><%= title %></td><td><%= starts_at %></td><td class="actionButton"></td>');

@@ -5,7 +5,7 @@ exports.index = function(req, res){
   	id: 'activity',
   	title: 'Activity List',
 	type: "Log",
-	info: "Showing the latest activity on Koala.",
+	info: "Showing all recent activity.",
 	logs: activity_logger.retrieve()
   });
 };

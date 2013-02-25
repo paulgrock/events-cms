@@ -98,7 +98,7 @@ app.get('/teams', teams.list);
 app.get('/teams/new', teams.new);
 app.get('/teams/:team_id', teams.edit);
 app.get('/videos', videos.list);
-app.get('/videos/:video_id', videos.edit);
+// app.get('/videos/:video_id', videos.edit);
 
 // Api Passthrough
 app.get('/api/:type', api.passThrough);

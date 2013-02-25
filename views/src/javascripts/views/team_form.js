@@ -9,8 +9,15 @@ Koala.views.add('team_form', Backbone.View.extend({
 		"keyup .teamLogo_input" : "setLogo"
 	},
 
+	initialize: function() {
+		this.team_image = Koala.views.new('team_image', {
+			model: this.model
+		});
+	},
+
 	render: function() {
 		this.$el.html(this.template(this.model.attributes));
+		$('.team_image', this.el).replaceWith(this.team_image.render().el);
 		return this;
 	},
 

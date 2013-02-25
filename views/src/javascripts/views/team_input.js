@@ -5,7 +5,8 @@ Koala.views.add('team_input', Backbone.View.extend({
 	className: "span3",
 
 	attributes: {
-		type: "text"
+		type: "text",
+		placeholder: "Enter an existing team's name..."
 	},
 
 	events: {
@@ -26,13 +27,27 @@ Koala.views.add('team_input', Backbone.View.extend({
 		this.$el.typeahead({
 			source: this.collection.pluck('name')
 		});
+
+		//Fill with TBA if empty
+		if(this.model.isNew()) {
+			var TBA = this.findTeam("TBA");
+			if(TBA) {
+				this.model.set(TBA, {silent:true});
+				this.render();
+			}
+		}
 	},
 
 	setTeam: function() {
 		var name = this.$el.val();
 		var team = this.findTeam(name);
-		this.model.clear({silent:true});
-		this.model.set(team);
+		if(team) {
+			this.model.clear({silent:true});
+			this.model.set(team);
+		}
+		else {
+			this.model.clear();
+		}
 	},
 
 	findTeam: function(name) {
