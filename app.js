@@ -19,7 +19,6 @@ var express = require('express')
 
 
 var port = 3000;
-var authPath = "auth.json";
 
 //Read Flags
 (function() {
@@ -31,36 +30,24 @@ var authPath = "auth.json";
                     port = flagVal;
                 }
             break;
-
-            case "--authPath":
-                var flagVal = array[index+1];
-                if(flagVal) {
-                    authPath = flagVal;
-                }
-            break;
         }
     });
 })();
 
 //Read Basic Auth Credentials
 var authConfig = (function() {
+    //Read ENV Variables:
+    var username = process.env.EVENT_CMS_USER;
+    var password = process.env.EVENT_CMS_PASS;
 
-    if(!fs.existsSync(authPath)) {
-        util.log("Could not find authentication config " + authPath + ". Aborting.");
+    if (!username || !password) {
+        util.log("Could not find authentication variables. Aborting.");
         process.exit(0);
     }
 
-    var rawJSON = fs.readFileSync(authPath);
-    var parsedJSON = {};
-
-    if(!rawJSON) return;
-
-    try {parsedJSON = JSON.parse(rawJSON);}
-    catch(e) {};
-
-    return {
-        user: parsedJSON.user || "hello",
-        pass: parsedJSON.pass || "world"
+   return {
+        user : username,
+        pass : password
     };
 
 })();
