@@ -18,7 +18,7 @@ var express = require('express')
     , api = require('./routes/api');
 
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 
 //Read Flags
 (function() {
