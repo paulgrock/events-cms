@@ -4,6 +4,8 @@ html
 		block head
 			title= title
 			link(rel='stylesheet', href='/stylesheets/koala-compiled.css')
+			link(rel='stylesheet', href='/bootstrap/bootstrap.min.css')
+			link(rel='stylesheet', href='/ui-darkness/jquery-ui-1.10.0.custom.min.css')
 
 	body
 
@@ -23,6 +25,11 @@ html
 
 
 		block scripts
-			script(src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+			script(src='/jquery/jquery-1.9.0.min.js')
+			script(src='/jquery/jquery-ui-1.10.0.custom.min.js')
+			script(src='/underscore/underscore-min.js')
+			script(src='/backbone/backbone-min.js')
+			script(src='/bootstrap/bootstrap.min.js')
+			script(src='/moment/moment.min.js')
 			script(src='/javascripts/vendor-compiled.js')
 			script(src='/javascripts/koala-compiled.js')
