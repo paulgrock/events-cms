@@ -5,7 +5,7 @@ var activity_logger = require('../lib/activity_logger');
 var fetchContent = function(options, payload, cb) {
 	var options = options || {};
 
-	options.hostname 	= 'esports.ign.com';
+	options.hostname 	= 'ec2-54-241-60-14.us-west-1.compute.amazonaws.com';
 	options.port 		= 80;
 	options.path 		= '/content/v2' + options.path;
 	options.method 		= (options.method || 'GET').toUpperCase();
