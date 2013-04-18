@@ -5,7 +5,7 @@ var activity_logger = require('../lib/activity_logger');
 var fetchContent = function(options, payload, cb) {
 	var options = options || {};
 
-	options.hostname 	= 'ec2-54-241-60-14.us-west-1.compute.amazonaws.com';
+	options.hostname 	= 'esports.ign.com';
 	options.port 		= 80;
 	options.path 		= '/content/v2' + options.path;
 	options.method 		= (options.method || 'GET').toUpperCase();
@@ -76,6 +76,7 @@ var passThrough = function(req, res) {
 				method: options.method.toUpperCase(),
 				status: status
 			});
+			app.notify(req.method, req.params['type'], chunks)
 		}
 
 	});

@@ -17,6 +17,8 @@ var express = require('express')
     , videos = require('./routes/videos')
     , api = require('./routes/api');
 
+app = express();
+var server_side_events = require('./routes/server_side_events');
 
 var port = process.env.PORT || 3000;
 
@@ -51,9 +53,6 @@ var authConfig = (function() {
     };
 
 })();
-
-
-var app = express();
 
 app.configure(function() {
     app.use(express.basicAuth(authConfig.user, authConfig.pass));
@@ -96,6 +95,8 @@ app.put('/api/:type/:id', api.action);
 app.post('/api/:type', api.action);
 app.delete('/api/:type/:id', api.action);
 
+// Server Side Events
+app.get('/update-stream', server_side_events.index);
 
 //App Locals
 
