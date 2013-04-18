@@ -67,7 +67,6 @@ app.configure(function() {
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.static(path.join(__dirname, 'views/src/javascripts/vendor')));
     app.use(express.static(path.join(__dirname, 'views/src/stylesheets/vendor')));
-    
 });
 
 app.configure('development', function(){
