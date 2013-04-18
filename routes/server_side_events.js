@@ -1,8 +1,7 @@
 var connections = [];
 
-
 var removeConnection = function(res){
-  var index = connection.indexOf(res);
+  var index = connections.indexOf(res);
   connections.splice(index, 1);
 }
 
@@ -29,7 +28,10 @@ exports.index = function(req, res){
     res.header({
       'content-type': 'text/event-stream',
       'cache-control': 'no-cache',
-      'connection': 'keep-alive'
+      'connection': 'keep-alive',
+      'Access-Control-Allow-Origin': "*",
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+      'Access-Control-Allow-Headers': 'Content-Type'
     });
     if(req.xhr) {
       res.xhr = null;
