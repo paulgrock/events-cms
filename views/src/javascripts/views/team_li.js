@@ -36,4 +36,4 @@ Koala.views.add('team_li', Backbone.View.extend({
 		this.remove();
 	}
 
-}))
+}));

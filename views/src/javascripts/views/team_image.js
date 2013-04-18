@@ -30,4 +30,4 @@ Koala.views.add('team_image', Backbone.View.extend({
 		return this;
 	}
 
-}))
+}));

@@ -38,4 +38,4 @@ Koala.views.add('teams_ul', Backbone.View.extend({
 		this.collection.each(this.addOne, this);
 	}
 
-}))
+}));
