@@ -37,7 +37,7 @@ exports.index = function(req, res){
         return;
     }
     if(req.accepts('text/event-stream')){
-        res.header({
+        res.writeHead(200, {
             'Content-Type': 'text/event-stream',
             'Cache-Control': 'no-cache',
             'Access-Control-Allow-Credentials': 'true',
