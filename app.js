@@ -18,7 +18,7 @@ var express = require('express')
     , api = require('./routes/api');
 
 app = express();
-var server_side_events = require('./routes/server_side_events');
+var server_sent_events = require('./routes/server_sent_events');
 
 var port = process.env.PORT || 3000;
 
@@ -55,7 +55,6 @@ var authConfig = (function() {
 })();
 
 app.configure(function() {
-    app.use(express.basicAuth(authConfig.user, authConfig.pass));
     app.set('port', port);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -74,28 +73,28 @@ app.configure('development', function(){
 });
 
 // Basic Webserver
-app.get('/', index.index);
-app.get('/events', events.list);
-app.get('/events/new', events.new);
-app.get('/events/:event_id', events.edit);
-app.get('/matchups', matchups.list);
-app.get('/matchups/new', matchups.new)
-app.get('/matchups/:matchup_id', matchups.edit)
-app.get('/teams', teams.list);
-app.get('/teams/new', teams.new);
-app.get('/teams/:team_id', teams.edit);
-app.get('/videos', videos.list);
+app.get('/', express.basicAuth(authConfig.user, authConfig.pass), index.index);
+app.get('/events', express.basicAuth(authConfig.user, authConfig.pass), events.list);
+app.get('/events/new', express.basicAuth(authConfig.user, authConfig.pass), events.new);
+app.get('/events/:event_id', express.basicAuth(authConfig.user, authConfig.pass), events.edit);
+app.get('/matchups', express.basicAuth(authConfig.user, authConfig.pass), matchups.list);
+app.get('/matchups/new', express.basicAuth(authConfig.user, authConfig.pass), matchups.new);
+app.get('/matchups/:matchup_id', express.basicAuth(authConfig.user, authConfig.pass), matchups.edit);
+app.get('/teams', express.basicAuth(authConfig.user, authConfig.pass), teams.list);
+app.get('/teams/new', express.basicAuth(authConfig.user, authConfig.pass), teams.new);
+app.get('/teams/:team_id', express.basicAuth(authConfig.user, authConfig.pass), teams.edit);
+app.get('/videos', express.basicAuth(authConfig.user, authConfig.pass), videos.list);
 // app.get('/videos/:video_id', videos.edit);
 
 // Api Passthrough
-app.get('/api/:type', api.passThrough);
-app.get('/api/:type/:id', api.passThrough);
-app.put('/api/:type/:id', api.action);
-app.post('/api/:type', api.action);
-app.delete('/api/:type/:id', api.action);
+app.get('/api/:type', express.basicAuth(authConfig.user, authConfig.pass), api.passThrough);
+app.get('/api/:type/:id', express.basicAuth(authConfig.user, authConfig.pass), api.passThrough);
+app.put('/api/:type/:id', express.basicAuth(authConfig.user, authConfig.pass), api.action);
+app.post('/api/:type', express.basicAuth(authConfig.user, authConfig.pass), api.action);
+app.delete('/api/:type/:id', express.basicAuth(authConfig.user, authConfig.pass), api.action);
 
-// Server Side Events
-app.get('/update-stream', server_side_events.index);
+// Server Sent Events
+app.get('/update-stream', server_sent_events.index);
 
 //App Locals
 

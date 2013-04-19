@@ -26,6 +26,17 @@ app.notify = function(method, type, data){
 
 exports.index = function(req, res){
     'use strict';
+    if (req.method === "OPTIONS") {
+        res.writeHead(200, {
+            "Access-Control-Allow-Origin": req.headers.origin,
+            "Access-Control-Allow-Methods": "GET",
+            "Access-Control-Allow-Headers": "Last-Event-ID, Cache-Control",
+            "Access-Control-Max-Age": "86400"
+        });
+        res.end();
+        return;
+    }
+
     res.header({
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',

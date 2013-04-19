@@ -50,9 +50,6 @@ module.exports = function(grunt){
                 tasks: ['default']
             }
         }
-
-        // Tasks being executed with 'grunt watch'
-        // watch: { … }
     });
 
     grunt.registerTask('default', [
