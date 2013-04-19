@@ -48,6 +48,24 @@ var formPath = function(req) {
 	return path;
 };
 
+var fetchMatchupData = function(matchup_id, method, type){
+    var req = http.get('http://esports.ign.com/content/v2/events.json?' + (new Date()).getTime(), function(res) {
+        var chunks = '';
+
+        res.on('data', function(chunk) {
+            chunks += chunk;
+        });
+
+        res.on('end', function() {
+            var chunkObj = JSON.parse(chunks);
+            chunkObj.forEach(function(event){
+                if(event.matchup.id === matchup_id) {
+                    app.notify(method, type, JSON.stringify(event));
+                }
+            });
+        });
+    });
+};
 
 var passThrough = function(req, res) {
 	var options = {
@@ -76,7 +94,14 @@ var passThrough = function(req, res) {
 				method: options.method.toUpperCase(),
 				status: status
 			});
-			app.notify(req.method, req.params['type'], chunks)
+            if(req.params.type === 'events') {
+                app.notify(req.method, req.params['type'], chunks);
+                return;
+            }
+            if(req.params.type === 'games' && req.body.matchup_id) {
+                fetchMatchupData(req.body.matchup_id, req.method, 'events');
+                return;
+            }
 		}
 
 	});
