@@ -664,7 +664,6 @@ Koala.collections.add('streams', Backbone.Collection.extend({
 
 	initialize: function(options) {
 		this.matchup = options.matchup;
-        this.model.set('matchup_id', this.matchup.get('id'));
 		this.listenTo(this.matchup, "change:teams", this.render);
 	},
 
