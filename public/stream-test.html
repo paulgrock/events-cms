@@ -5,8 +5,11 @@
 </head>
 <body>
   <p>testing</p>
+<!-- <script src='/javascripts/eventsource.js'></script> -->
 <script>
-    var source = new EventSource('/update-stream');
+    var source = new EventSource('http://localhost:3000/update-stream', {
+        withCredentials: true
+    });
 
     source.addEventListener('events', function(message){
       console.log(message);

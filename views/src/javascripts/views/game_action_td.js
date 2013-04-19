@@ -1,5 +1,5 @@
 Koala.views.add('game_action_td', Backbone.View.extend({
-	
+
 	tagName: "td",
 
 	events: {
@@ -45,11 +45,13 @@ Koala.views.add('game_action_td', Backbone.View.extend({
 	},
 
 	end: function() {
+        this.model.set('matchup_id', this.matchup.get('id'));
 		this.model.set('ends_at', moment().format());
 		this.sync();
 	},
 
 	start: function() {
+        this.model.set('matchup_id', this.matchup.get('id'));
 		this.model.set('starts_at', moment().format());
 		this.sync();
 	},
