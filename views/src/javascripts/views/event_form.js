@@ -77,8 +77,8 @@ Koala.views.add('event_form', Backbone.View.extend({
 
 	render: function() {
 		this.$el.html(this.template(this.model.attributes));
-		$('#event-stream-wrapper').append(this.views.stream_select.render().el);
-		$('#event-group-wrapper').append(this.views.group_select.render().el);
+		//$('#event-stream-wrapper').append(this.views.stream_select.render().el);
+		// $('#event-group-wrapper').append(this.views.group_select.render().el);
 		$('#startDate').replaceWith(this.views.startDate_form.render().el);
 		$('#endDate').replaceWith(this.views.endDate_form.render().el);
 		$('#matchup').replaceWith(this.views.matchup_form.render().el);
