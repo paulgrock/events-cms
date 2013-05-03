@@ -7,7 +7,8 @@ var fetchContent = function(options, payload, cb) {
 	var options = options || {};
 
 	options.hostname 	= 'ec2-54-241-60-14.us-west-1.compute.amazonaws.com';
-	options.port 		= 80;
+	//options.hostname   = 'esports.ign.com';
+    options.port 		= 80;
 	options.path 		= '/content/v2' + options.path;
 	options.method 		= (options.method || 'GET').toUpperCase();
 
@@ -33,6 +34,7 @@ var fetchContent = function(options, payload, cb) {
 
 	req.on('error', function(e) {
 		cb();
+        return false;
 	});
 
 	// write data to request body
@@ -60,9 +62,9 @@ var fetchMatchupData = function(matchup_id, method, type){
         res.on('end', function() {
             var chunkObj = JSON.parse(chunks);
             chunkObj.forEach(function(event){
-                // if(event.matchup.id === matchup_id) {
-                //     notifier.notify(method, type, JSON.stringify(event));
-                // }
+                if(event.matchup.id === matchup_id) {
+                    notifier.notify(method, type, JSON.stringify(event));
+                }
             });
         });
     });
@@ -83,7 +85,7 @@ var passThrough = function(req, res) {
 			res.send();
 			return;
 		}
-		// res.set(headers);
+		res.set(headers);
 		res.status(status);
 		res.send(chunks);
 
