@@ -51,6 +51,7 @@ var formPath = function(req) {
 };
 
 var fetchMatchupData = function(matchup_id, method, type){
+    // TODO: make hostname a global variable
     var req = http.get('http://ec2-54-241-60-14.us-west-1.compute.amazonaws.com/content/v2/events.json?' + (new Date()).getTime(), function(res) {
         var chunks = '';
 
