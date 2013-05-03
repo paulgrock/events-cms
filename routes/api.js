@@ -82,7 +82,7 @@ var passThrough = function(req, res) {
 			res.send();
 			return;
 		}
-		res.set(headers);
+		// res.set(headers);
 		res.status(status);
 		res.send(chunks);
 
