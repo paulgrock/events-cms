@@ -80,10 +80,9 @@ var passThrough = function(req, res) {
 
 	fetchContent(options, body, function(chunks, headers, status) {
 		if(!status) {
-			res.send();
 			return;
 		}
-		// res.set(headers);
+		res.set(headers);
 		res.status(status);
 		res.send(chunks);
 
