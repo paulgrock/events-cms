@@ -17,7 +17,7 @@ var express = require('express')
     , videos = require('./routes/videos')
     , api = require('./routes/api');
 
-app = express();
+var app = express();
 var server_sent_events = require('./routes/server_sent_events');
 
 var port = process.env.PORT || 3000;

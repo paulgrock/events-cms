@@ -1,6 +1,7 @@
 var http = require('http');
 var querystring = require('querystring');
 var activity_logger = require('../lib/activity_logger');
+var notifier = require('../lib/notifier');
 
 var fetchContent = function(options, payload, cb) {
 	var options = options || {};
@@ -59,9 +60,9 @@ var fetchMatchupData = function(matchup_id, method, type){
         res.on('end', function() {
             var chunkObj = JSON.parse(chunks);
             chunkObj.forEach(function(event){
-                if(event.matchup.id === matchup_id) {
-                    app.notify(method, type, JSON.stringify(event));
-                }
+                // if(event.matchup.id === matchup_id) {
+                //     notifier.notify(method, type, JSON.stringify(event));
+                // }
             });
         });
     });
@@ -95,7 +96,7 @@ var passThrough = function(req, res) {
 				status: status
 			});
             if(req.params.type === 'events') {
-                app.notify(req.method, req.params['type'], chunks);
+                notifier.notify(req.method, req.params['type'], chunks);
                 return;
             }
             if(req.params.type === 'games' && req.body.matchup_id) {

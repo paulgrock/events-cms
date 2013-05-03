@@ -1,28 +1,4 @@
-var connections = [];
-var removeConnection = function(res, interval){
-    'use strict';
-    var index = connections.indexOf(res);
-    connections.splice(index, 1);
-    clearInterval(interval);
-};
-
-// Global function to trigger server side event
-app.notify = function(method, type, data){
-    'use strict';
-    var message = '';
-    data = JSON.parse(data);
-    var messageObj = {
-        method: method,
-        title: data.title,
-        matchup: data.matchup,
-        starts_at: data.starts_at
-    };
-    message += 'event: ' + type + '\n';
-    message += 'data: ' + JSON.stringify(messageObj) + '\n\n';
-    connections.forEach(function(res){
-        res.write(message);
-    });
-};
+var notifier = require('../lib/notifier');
 
 exports.index = function(req, res){
     'use strict';
@@ -50,7 +26,7 @@ exports.index = function(req, res){
             res.xhr = null;
         }
 
-        connections.push(res);
+        notifier.connections.push(res);
         res.write('id\n');
 
         var interval = setInterval(function () {
@@ -58,7 +34,7 @@ exports.index = function(req, res){
         }, 1000);
 
         req.on('close', function(){
-            removeConnection(res, interval);
+            notifier.removeConnection(res, interval);
         });
     } else {
         res.send('');
