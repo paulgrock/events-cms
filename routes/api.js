@@ -34,7 +34,6 @@ var fetchContent = function(options, payload, cb) {
 
 	req.on('error', function(e) {
 		cb();
-        return false;
 	});
 
 	// write data to request body
@@ -52,7 +51,7 @@ var formPath = function(req) {
 };
 
 var fetchMatchupData = function(matchup_id, method, type){
-    var req = http.get('http://esports.ign.com/content/v2/events.json?' + (new Date()).getTime(), function(res) {
+    var req = http.get('http://ec2-54-241-60-14.us-west-1.compute.amazonaws.com/content/v2/events.json?' + (new Date()).getTime(), function(res) {
         var chunks = '';
 
         res.on('data', function(chunk) {
@@ -79,10 +78,8 @@ var passThrough = function(req, res) {
 
 	//Express parses body to json, convert back to string
 	var body = JSON.stringify(req.body);
-
 	fetchContent(options, body, function(chunks, headers, status) {
 		if(!status) {
-			res.send();
 			return;
 		}
 		res.set(headers);
